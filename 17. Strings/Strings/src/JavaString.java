@@ -21,5 +21,10 @@ public class JavaString {
         System.out.println(fullName.length());
 
         // String Concatenation:
+        String firstName = "Satinder";
+        String middleName = "Singh";
+        String lastName = "Sall";
+        String fullName2 = firstName + " " + middleName + " " + lastName;
+        System.out.println("Full Name: " + fullName2);
     }
 }
