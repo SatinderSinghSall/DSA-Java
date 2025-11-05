@@ -2,7 +2,7 @@
 
 public class PowerOfTwoCheck {
     public static void main(String[] args) {
-        int[] numbers = {1, 2, 3, 4, 8, 10, 16, 18};
+        int[] numbers = {1, 2, 3, 4, 8};
 
         System.out.println("Java: Check if a Number is a Power of 2\n");
 
