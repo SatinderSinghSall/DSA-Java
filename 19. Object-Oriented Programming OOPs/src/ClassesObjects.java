@@ -10,6 +10,13 @@ public class ClassesObjects {
         p1.color = "Yellow";
         p1.tip = 10;
         System.out.println("Pen Properties: " + p1.color + " " + p1.tip);
+
+        // Bank Account Object:
+        BankAccount ba1 = new BankAccount();
+        ba1.userName = "Satinder Singh Sall";
+//        ba1.password = "Satinder@123";
+
+        ba1.setPassword("Satinder@123");
     }
 }
 
@@ -37,5 +44,10 @@ class Student {
 }
 
 class BankAccount {
+    public String userName;
+    private String password;
 
+    public void setPassword(String Password) {
+        password = Password;
+    }
 }
