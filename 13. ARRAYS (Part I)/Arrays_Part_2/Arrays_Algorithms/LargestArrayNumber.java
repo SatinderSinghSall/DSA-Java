@@ -1,6 +1,6 @@
 // Find the Largest Array Number Algorithm:
 
-package Arrays_Part_2;
+package Arrays_Part_2.Arrays_Algorithms;
 
 public class LargestArrayNumber {
     public static int LargestArrayNumber_Algorithm(int numbers[]) {
