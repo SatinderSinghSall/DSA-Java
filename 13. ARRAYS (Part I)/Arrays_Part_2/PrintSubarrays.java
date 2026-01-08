@@ -8,6 +8,7 @@ package Arrays_Part_2;
 
 public class PrintSubarrays {
     public static void  Subarray_Logic(int numArr[]) {
+        int totalSubarrays = 0;
         for(int i = 0; i < numArr.length; i ++) {
             int start = i;
             for(int j = i; j < numArr.length; j ++) {
@@ -16,9 +17,11 @@ public class PrintSubarrays {
                     System.out.print(numArr[k]);
                 }
                 System.out.println();
+                totalSubarrays = totalSubarrays + 1;
             }
         }
         System.out.println();
+        System.out.println(totalSubarrays);
     }
 
     public static void main(String[] args) {
