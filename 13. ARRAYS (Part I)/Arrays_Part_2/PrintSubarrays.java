@@ -14,14 +14,15 @@ public class PrintSubarrays {
             for(int j = i; j < numArr.length; j ++) {
                 int end = j;
                 for(int k = start; k <= end; k ++) {
-                    System.out.print(numArr[k]);
+                    System.out.print(numArr[k] + " ");
                 }
                 System.out.println();
                 totalSubarrays = totalSubarrays + 1;
             }
+            System.out.println();
         }
         System.out.println();
-        System.out.println(totalSubarrays);
+        System.out.println("Total Subarrays: " + totalSubarrays);
     }
 
     public static void main(String[] args) {
