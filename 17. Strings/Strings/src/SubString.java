@@ -16,5 +16,6 @@ public class SubString {
         int ei = 5;
 
         System.out.println(SubString(str, si, ei));
+        System.out.println(str.substring(si, ei));
     }
 }
