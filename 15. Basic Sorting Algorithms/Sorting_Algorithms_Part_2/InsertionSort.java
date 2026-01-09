@@ -4,7 +4,19 @@ package Sorting_Algorithms_Part_2;
 
 public class InsertionSort {
     public static void InsertionSort_Algorithm(int numArr[]) {
-        System.out.println("Teating...");
+        for(int i = 1; i < numArr.length; i ++) {
+            int currEle = numArr[i]; // temp memory to store ele.
+            int preEle = i - 1;
+
+            // Finding out the correct position to insert:
+            while(preEle >= 0 && numArr[preEle] > currEle) {
+                numArr[preEle + 1] = numArr[preEle];
+                preEle --;
+            }
+
+            // Insertion Algo:
+            numArr[preEle + 1] = currEle;
+        }
     }
 
     public static void PrintArray(int numbers[]) {
