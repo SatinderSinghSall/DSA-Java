@@ -7,11 +7,18 @@
 package Recursion;
 
 public class PrintNumbers {
-    public static void printNumberDescending() {
-        System.out.println("Testing...");
+    public static void printNumberDescending(int num) {
+        if(num == 1) { // base-case
+            System.out.println(num);
+            return;
+        }
+        System.out.print(num + " ");
+        printNumberDescending(num - 1);
     }
 
     public static void main(String[] args) {
-        printNumberDescending();
+        int num = 10;
+
+        printNumberDescending(num);
     }
 }
