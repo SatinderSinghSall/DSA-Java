@@ -15,10 +15,27 @@ public class FibonacciNumber {
         return fibonacci(n - 1) + fibonacci(n - 2);
     }
 
+    public static int fibonacci_Logic(int n) {
+        if (n == 0) {
+            return 0;
+        }
+
+        if (n == 1) {
+            return 1;
+        }
+
+        int fib_nm1 = fibonacci_Logic(n - 1);
+        int fib_nm2 = fibonacci_Logic(n - 2);
+        int finn = fib_nm1 + fib_nm2;
+
+        return finn;
+    }
+
     public static void main(String[] args) {
         int n = 10; // Find the 10th Fibonacci number
         int result = fibonacci(n);
 
         System.out.println("The " + n + "th Fibonacci number is: " + result);
+        System.out.println(fibonacci_Logic(n));
     }
 }
