@@ -6,12 +6,17 @@
 package Recursion;
 
 public class Factorial {
-    public static void Factorial_Logic(int num) {
-        System.out.println(num);
+    public static int Factorial_Logic(int num) {
+        if(num == 0) {
+            return 1;
+        }
+        int fnm1 = Factorial_Logic(num - 1);
+        int fn = num * Factorial_Logic(num - 1);
+        return fn;
     }
 
     public static void main(String[] args) {
         int num = 5;
-        Factorial_Logic(num);
+        System.out.println(Factorial_Logic(num));
     }
 }
