@@ -9,7 +9,7 @@ package Recursion;
 public class PrintNumbers {
     public static void printNumberDescending(int num) {
         if(num == 1) { // base-case
-            System.out.println(num);
+            System.out.println(1);
             return;
         }
         System.out.print(num + " ");
