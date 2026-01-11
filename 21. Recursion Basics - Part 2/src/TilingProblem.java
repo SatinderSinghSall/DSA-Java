@@ -9,11 +9,13 @@
 */
 
 public class TilingProblem {
-    public static void Tiling_Logic() {
+    public static int Tiling_Problem_Logic() {
         System.out.println("Testing...");
+
+        return 0;
     }
 
     public static void main(String[] args) {
-        Tiling_Logic();
+        Tiling_Problem_Logic();
     }
 }
