@@ -9,11 +9,30 @@
 
 
 public class FriendsParingProblem {
-    public static void FriendsParingProblem_Logic() {
-        System.out.println("Testing...");
+    public static int FriendsParingProblem_Logic(int n) {
+        if (n == 1 || n == 2) {
+            return n;
+        }
+
+        int fnm1 = FriendsParingProblem_Logic(n - 1);
+        int fnm2 = FriendsParingProblem_Logic(n - 2);
+        int pairWays = (n - 1) * fnm2;
+        int totalWays = fnm1 + pairWays;
+
+        return totalWays;
+    }
+
+    public static int FriendsParingProblem_Logic_2(int n) {
+        if (n == 1 || n == 2) {
+            return n;
+        }
+
+        return FriendsParingProblem_Logic_2(n - 1) + (n - 1) * FriendsParingProblem_Logic_2(n - 2);
     }
 
     public static void main(String[] args) {
-        FriendsParingProblem_Logic();
+        int n = 3;
+        System.out.println(FriendsParingProblem_Logic(n));
+        System.out.println(FriendsParingProblem_Logic_2(n));
     }
 }
