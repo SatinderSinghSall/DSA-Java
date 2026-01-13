@@ -8,17 +8,18 @@ public class MergeSort {
         System.out.println();
     }
 
-    public static int MergeSort_Algorithm(int arr[]) {
+    public static int MergeSort_Algorithm(int arr[], int si, int ei) {
         System.out.println("Testing...");
         return 0;
     }
 
     public static void main(String[] args) {
         int arr[] = {3, 2, 9, 5, 2, 8};
+        int si = arr[0];
+        int ei = arr.length - 1;
+
         PrintArray(arr);
-
-        MergeSort_Algorithm(arr);
-
+        MergeSort_Algorithm(arr, si, ei);
         PrintArray(arr);
     }
 }
