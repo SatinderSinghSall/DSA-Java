@@ -1,386 +1,432 @@
-# 📘 Java Arrays – Complete Documentation
+# 🧮 2D Arrays in Java — Complete Guide (Basic to Advanced)
+
+A comprehensive guide to **2D Arrays in Java**, covering:
+
+- Core concepts & theory
+- Memory representation
+- Common operations
+- Important patterns
+- Matrix-based problems
+- Clean and well-commented Java code
+
+Ideal for **Java beginners, DSA learners, and interview preparation**.
 
 ---
 
-# 📑 Table of Contents (Index)
+## 📚 Table of Contents
 
-1. **Introduction to Arrays in Java**
-   1.1 What is an Array
-   1.2 Why Use Arrays
-
-2. **Array Characteristics**
-
-3. **Array Declaration in Java**
-   3.1 Declaration Syntax
-   3.2 Declaration Examples
-
-4. **Array Creation (Memory Allocation)**
-   4.1 Using `new` Keyword
-   4.2 Memory Initialization
-
-5. **Array Initialization**
-   5.1 Static Initialization
-   5.2 Dynamic Initialization
-
-6. **Default Values in Arrays**
-
-7. **Accessing Array Elements**
-   7.1 Indexing Rules
-   7.2 Examples
-
-8. **Taking Input in Arrays**
-   8.1 Using Scanner
-   8.2 Storing User Input
-
-9. **Printing Array Elements**
-   9.1 Manual Printing
-   9.2 Using Loops
-
-10. **Updating Array Elements**
-
-11. **Array Length Property**
-
-12. **Traversing an Array**
-    12.1 Using `for` Loop
-    12.2 Using Enhanced `for-each` Loop
-
-13. **Common Array Operations**
-    13.1 Searching Elements
-    13.2 Finding Maximum Value
-    13.3 Finding Minimum Value
-    13.4 Calculating Sum of Elements
-
-14. **Common Errors in Arrays**
-
-15. **Advantages of Arrays**
-
-16. **Limitations of Arrays**
-
-17. **Real-Life Use Cases of Arrays**
-
-18. **Conclusion**
+- [Introduction](#introduction)
+- [What is a 2D Array?](#what-is-a-2d-array)
+- [Why Use 2D Arrays?](#why-use-2d-arrays)
+- [Memory Representation](#memory-representation)
+- [Declaring a 2D Array in Java](#declaring-a-2d-array-in-java)
+- [Accessing Elements](#accessing-elements)
+- [Traversing a 2D Array](#traversing-a-2d-array)
+- [Common 2D Array Operations](#common-2d-array-operations)
+- [Important Patterns](#important-patterns)
+- [Matrix Problems](#matrix-problems)
+- [Time & Space Complexity](#time--space-complexity)
+- [Best Practices](#best-practices)
+- [Common Mistakes](#common-mistakes)
+- [Conclusion](#conclusion)
 
 ---
 
-## 1. Introduction to Arrays in Java
+## 📖 Introduction
 
-An **array** in Java is a **fixed-size**, **indexed**, and **homogeneous** data structure used to store multiple values of the **same data type** under a single variable name.
+2D Arrays are one of the most widely used data structures in Java.  
+They are used in:
 
-### Why Use Arrays?
+- Matrix computations
+- Grid-based problems
+- Games & simulations
+- Dynamic Programming
+- Image processing
 
-* Store multiple values efficiently
-* Reduce the number of variables
-* Easy traversal using loops
-* Faster access using index
-
----
-
-## 2. Array Characteristics
-
-| Feature           | Description                           |
-| ----------------- | ------------------------------------- |
-| Fixed Size        | Size must be defined at creation      |
-| Zero Indexed      | Index starts from `0`                 |
-| Same Data Type    | All elements must be of the same type |
-| Contiguous Memory | Stored in continuous memory locations |
-| Random Access     | Access elements using index           |
+Understanding 2D arrays is **mandatory** before learning advanced DSA topics.
 
 ---
 
-## 3. Array Declaration in Java
+## ❓ What is a 2D Array?
 
-### Syntax:
+A **2D Array** is an array of arrays arranged in **rows and columns**.
 
-```java
-datatype[] arrayName;
+### Example
+
 ```
 
-OR
+1 2 3
+4 5 6
+7 8 9
 
-```java
-datatype arrayName[];
 ```
 
-### Example:
+In Java:
 
-```java
-int[] marks;
-String[] fruits;
-```
+- Rows → `matrix.length`
+- Columns → `matrix[0].length`
+- Element → `matrix[i][j]`
 
 ---
 
-## 4. Array Creation (Memory Allocation)
+## 🤔 Why Use 2D Arrays?
 
-### Syntax:
-
-```java
-arrayName = new datatype[size];
-```
-
-### Example from Your Code:
-
-```java
-int marks[] = new int[50];
-```
-
-➡ Creates an array that can store **50 integers**, initialized with default value `0`.
+✔ Represents tabular data
+✔ Efficient for grid-based problems
+✔ Used in matrices and DP
+✔ Easy row-column access
 
 ---
 
-## 5. Array Initialization
+## 🧠 Memory Representation
 
-### 5.1 Static Initialization
+In Java:
 
-Values are provided at compile time.
+- A 2D array is **not stored contiguously**
+- It is an **array of references to row arrays**
 
-```java
-int numbers[] = {1, 2, 3};
-String fruits[] = {"Apple", "Mango", "Orange"};
 ```
 
-✔ Java automatically determines the size.
+matrix → [row0, row1, row2]
+row0 → [1, 2, 3]
+row1 → [4, 5, 6]
+row2 → [7, 8, 9]
+
+```
+
+📌 Java supports **jagged arrays** (rows can have different lengths).
 
 ---
 
-### 5.2 Dynamic Initialization (Using new keyword)
+## 🧾 Declaring a 2D Array in Java
+
+### 1️⃣ Declaration + Initialization
 
 ```java
-int arrMarks[] = new int[100];
-```
-
-✔ Size is fixed
-✔ Values are initialized with **default values**
-
----
-
-## 6. Default Values in Arrays
-
-| Data Type       | Default Value |
-| --------------- | ------------- |
-| int             | 0             |
-| float           | 0.0           |
-| double          | 0.0           |
-| char            | '\u0000'      |
-| boolean         | false         |
-| String / Object | null          |
-
----
-
-## 7. Accessing Array Elements
-
-### Syntax:
-
-```java
-arrayName[index]
-```
-
-### Example:
-
-```java
-arrMarks[0]
-arrMarks[1]
-arrMarks[2]
-```
-
-📌 **Index starts from 0**
-
----
-
-## 8. Taking Input in Arrays (Your Code Explained)
-
-```java
-Scanner sc = new Scanner(System.in);
-
-System.out.print("Enter Physics marks: ");
-arrMarks[0] = sc.nextInt();
-
-System.out.print("Enter Chemistry marks: ");
-arrMarks[1] = sc.nextInt();
-
-System.out.print("Enter Mathematics marks: ");
-arrMarks[2] = sc.nextInt();
-```
-
-✔ Uses `Scanner`
-✔ Stores input directly into array indices
-
----
-
-## 9. Printing Array Elements
-
-### Manual Printing:
-
-```java
-System.out.println(arrMarks[0]);
-```
-
-### Using Loop (Recommended):
-
-```java
-for(int i = 0; i < 3; i++) {
-    System.out.println(arrMarks[i]);
-}
+int[][] matrix = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
 ```
 
 ---
 
-## 10. Updating Array Elements
-
-Arrays allow **modification** using index.
-
-### Example:
+### 2️⃣ Using `new` Keyword
 
 ```java
-arrMarks[2] = 100;
-```
-
-✔ Updates Mathematics marks
-✔ Original value is overwritten
-
----
-
-## 11. Array Length Property
-
-To get the size of an array:
-
-```java
-arrMarks.length
-```
-
-⚠ `length` is a **property**, not a method.
-
-### Example:
-
-```java
-for(int i = 0; i < arrMarks.length; i++) {
-    System.out.println(arrMarks[i]);
-}
+int[][] matrix = new int[3][4];
 ```
 
 ---
 
-## 12. Traversing an Array
-
-### 12.1 Using for loop
+### 3️⃣ Jagged Array
 
 ```java
-for(int i = 0; i < arrMarks.length; i++) {
-    System.out.println(arrMarks[i]);
-}
+int[][] matrix = new int[3][];
+matrix[0] = new int[2];
+matrix[1] = new int[4];
+matrix[2] = new int[1];
 ```
-
-### 12.2 Using enhanced for-each loop
-
-```java
-for(int mark : arrMarks) {
-    System.out.println(mark);
-}
-```
-
-✔ Read-only traversal
-✔ Cleaner syntax
 
 ---
 
-## 13. Common Array Operations
-
-### ✔ Searching
+## 🔍 Accessing Elements
 
 ```java
-int key = 50;
-for(int i = 0; i < arrMarks.length; i++) {
-    if(arrMarks[i] == key) {
-        System.out.println("Found at index " + i);
+System.out.println(matrix[0][0]); // First element
+System.out.println(matrix[2][1]); // Access row 3, col 2
+```
+
+---
+
+## 🔄 Traversing a 2D Array
+
+---
+
+### Row-wise Traversal
+
+```java
+for (int i = 0; i < matrix.length; i++) {
+    for (int j = 0; j < matrix[i].length; j++) {
+        System.out.print(matrix[i][j] + " ");
     }
+    System.out.println();
 }
 ```
 
 ---
 
-### ✔ Finding Maximum
+### Using Enhanced For Loop
 
 ```java
-int max = arrMarks[0];
-for(int i = 1; i < arrMarks.length; i++) {
-    if(arrMarks[i] > max) {
-        max = arrMarks[i];
+for (int[] row : matrix) {
+    for (int val : row) {
+        System.out.print(val + " ");
     }
+    System.out.println();
 }
 ```
 
 ---
 
-### ✔ Finding Minimum
+### Column-wise Traversal
 
 ```java
-int min = arrMarks[0];
-for(int i = 1; i < arrMarks.length; i++) {
-    if(arrMarks[i] < min) {
-        min = arrMarks[i];
+for (int j = 0; j < matrix[0].length; j++) {
+    for (int i = 0; i < matrix.length; i++) {
+        System.out.print(matrix[i][j] + " ");
     }
+    System.out.println();
 }
 ```
 
 ---
 
-### ✔ Sum of Elements
+## 🧩 Common 2D Array Operations
+
+---
+
+### 1️⃣ Sum of All Elements
 
 ```java
 int sum = 0;
-for(int mark : arrMarks) {
-    sum += mark;
+
+for (int[] row : matrix) {
+    for (int val : row) {
+        sum += val;
+    }
+}
+
+System.out.println(sum);
+```
+
+---
+
+### 2️⃣ Find Maximum Element
+
+```java
+int max = matrix[0][0];
+
+for (int[] row : matrix) {
+    for (int val : row) {
+        max = Math.max(max, val);
+    }
+}
+
+System.out.println(max);
+```
+
+---
+
+### 3️⃣ Search an Element
+
+```java
+static int[] search(int[][] matrix, int target) {
+    for (int i = 0; i < matrix.length; i++) {
+        for (int j = 0; j < matrix[i].length; j++) {
+            if (matrix[i][j] == target) {
+                return new int[]{i, j};
+            }
+        }
+    }
+    return new int[]{-1, -1};
 }
 ```
 
 ---
 
-## 14. Common Errors in Arrays
-
-| Error                          | Cause                     |
-| ------------------------------ | ------------------------- |
-| ArrayIndexOutOfBoundsException | Accessing invalid index   |
-| NullPointerException           | Using uninitialized array |
-| Fixed Size Limitation          | Cannot resize array       |
+## 🎯 Important Patterns
 
 ---
 
-## 15. Advantages of Arrays
+### 🔹 Main Diagonal
 
-✔ Fast access
-✔ Easy traversal
-✔ Memory efficient
-✔ Useful for large data storage
-
----
-
-## 16. Limitations of Arrays
-
-❌ Fixed size
-❌ No built-in methods for insertion/deletion
-❌ Only homogeneous data
-
-➡ For dynamic data, use **ArrayList**
+```java
+for (int i = 0; i < matrix.length; i++) {
+    System.out.print(matrix[i][i] + " ");
+}
+```
 
 ---
 
-## 17. Real-Life Use Cases
+### 🔹 Reverse Each Row
 
-* Student marks
-* Sensor readings
-* Game scores
-* Image pixels
-* Data buffers
+```java
+for (int[] row : matrix) {
+    int left = 0, right = row.length - 1;
+    while (left < right) {
+        int temp = row[left];
+        row[left] = row[right];
+        row[right] = temp;
+        left++;
+        right--;
+    }
+}
+```
+
+---
+
+### 🔹 Transpose of Matrix
+
+```java
+int rows = matrix.length;
+int cols = matrix[0].length;
+int[][] transpose = new int[cols][rows];
+
+for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+        transpose[j][i] = matrix[i][j];
+    }
+}
+```
 
 ---
 
-## 18. Conclusion
+### 🔹 Rotate Matrix 90° Clockwise
 
-Arrays are the **foundation of data structures in Java**.
-Understanding arrays helps in mastering:
+```java
+// Step 1: Transpose
+for (int i = 0; i < n; i++) {
+    for (int j = i; j < n; j++) {
+        int temp = matrix[i][j];
+        matrix[i][j] = matrix[j][i];
+        matrix[j][i] = temp;
+    }
+}
 
-* Sorting algorithms
-* Searching algorithms
-* Advanced data structures (Stack, Queue, ArrayList)
+// Step 2: Reverse rows
+for (int[] row : matrix) {
+    int l = 0, r = n - 1;
+    while (l < r) {
+        int temp = row[l];
+        row[l] = row[r];
+        row[r] = temp;
+        l++;
+        r--;
+    }
+}
+```
 
 ---
+
+## 🧠 Matrix Problems
+
+---
+
+### 🔹 Matrix Addition
+
+```java
+static int[][] add(int[][] a, int[][] b) {
+    int[][] result = new int[a.length][a[0].length];
+
+    for (int i = 0; i < a.length; i++) {
+        for (int j = 0; j < a[0].length; j++) {
+            result[i][j] = a[i][j] + b[i][j];
+        }
+    }
+    return result;
+}
+```
+
+---
+
+### 🔹 Matrix Multiplication
+
+```java
+static int[][] multiply(int[][] a, int[][] b) {
+    int[][] result = new int[a.length][b[0].length];
+
+    for (int i = 0; i < a.length; i++) {
+        for (int j = 0; j < b[0].length; j++) {
+            for (int k = 0; k < b.length; k++) {
+                result[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+    return result;
+}
+```
+
+---
+
+### 🔹 Spiral Traversal
+
+```java
+static void spiral(int[][] matrix) {
+    int top = 0, bottom = matrix.length - 1;
+    int left = 0, right = matrix[0].length - 1;
+
+    while (top <= bottom && left <= right) {
+        for (int i = left; i <= right; i++)
+            System.out.print(matrix[top][i] + " ");
+        top++;
+
+        for (int i = top; i <= bottom; i++)
+            System.out.print(matrix[i][right] + " ");
+        right--;
+
+        if (top <= bottom) {
+            for (int i = right; i >= left; i--)
+                System.out.print(matrix[bottom][i] + " ");
+            bottom--;
+        }
+
+        if (left <= right) {
+            for (int i = bottom; i >= top; i--)
+                System.out.print(matrix[i][left] + " ");
+            left++;
+        }
+    }
+}
+```
+
+---
+
+## ⏱ Time & Space Complexity
+
+| Operation      | Complexity     |
+| -------------- | -------------- |
+| Traversal      | O(rows × cols) |
+| Search         | O(rows × cols) |
+| Transpose      | O(rows × cols) |
+| Rotation       | O(n²)          |
+| Multiplication | O(n³)          |
+
+---
+
+## ✅ Best Practices
+
+✔ Always check matrix dimensions
+✔ Use `matrix.length` and `matrix[i].length`
+✔ Prefer enhanced loops when possible
+✔ Handle edge cases (1×N, N×1)
+✔ Write reusable methods
+
+---
+
+## ❌ Common Mistakes
+
+❌ Assuming equal row sizes
+❌ Index out of bounds
+❌ Confusing rows and columns
+❌ Modifying matrix unintentionally
+❌ Ignoring null checks
+
+---
+
+## 🏁 Conclusion
+
+2D Arrays are a **core concept in Java DSA**.
+
+> Mastering 2D arrays unlocks:
+
+- Matrix algorithms
+- Dynamic Programming
+- Graph traversal
+- Advanced problem solving
+
+---
+
+⭐ If this repository helped you, **give it a star**
+Happy Coding 🚀
