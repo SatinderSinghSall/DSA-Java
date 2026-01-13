@@ -49,7 +49,7 @@ public class MergeSort {
     }
 
     public static void main(String[] args) {
-        int arr[] = {3, 2, 9, 5, 2, 8};
+        int arr[] = {6, 3, 9, 5, 2, 8};
         int si = 0;
         int ei = arr.length - 1;
 
