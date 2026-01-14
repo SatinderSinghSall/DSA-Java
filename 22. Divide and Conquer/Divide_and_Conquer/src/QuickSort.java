@@ -8,15 +8,17 @@ public class QuickSort {
         System.out.println();
     }
 
-    public static void QuickSort_Algorithm(int arr[]) {
+    public static void QuickSort_Algorithm(int arr[], int si, int ei) {
         System.out.println("Testing...");
     }
 
     public static void main(String[] args) {
         int arr[] = {6, 3, 9, 8, 2, 5};
+        int si = 0;
+        int ei = arr.length;
 
         PrintArray(arr);
-        QuickSort_Algorithm(arr);
+        QuickSort_Algorithm(arr, si, ei);
         PrintArray(arr);
     }
 }
