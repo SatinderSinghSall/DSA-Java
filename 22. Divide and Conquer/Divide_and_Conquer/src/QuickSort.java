@@ -9,13 +9,13 @@ public class QuickSort {
     }
 
     public static void QuickSort_Algorithm(int arr[], int si, int ei) {
-        System.out.println("Testing...");
+
     }
 
     public static void main(String[] args) {
         int arr[] = {6, 3, 9, 8, 2, 5};
         int si = 0;
-        int ei = arr.length;
+        int ei = arr.length - 1;
 
         PrintArray(arr);
         QuickSort_Algorithm(arr, si, ei);
