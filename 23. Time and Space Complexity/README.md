@@ -125,8 +125,6 @@ static int linearSearch(int[] arr, int target) {
 }
 ```
 
-````
-
 - **Best case**: target at index 0 → `O(1)`
 - **Worst case**: target at last / not found → `O(n)`
 - **Average case**: random position → `O(n)`
@@ -837,13 +835,3 @@ static int rangeSum(int[] pref, int l, int r) {
 
 - **Time: O(n) or O(n log n)**
 - **Space: O(1) or O(n)** depending on problem
-
----
-
-## ⭐ If you want, I can also add:
-
-✅ 50+ practice problems with solutions in Java
-✅ Visual recursion trees + recurrence solving examples
-✅ Complexity of graph algorithms (Dijkstra, Floyd, etc.)
-✅ LeetCode-style patterns and templates
-````
