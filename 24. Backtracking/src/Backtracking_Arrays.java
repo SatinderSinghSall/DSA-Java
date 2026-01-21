@@ -9,7 +9,16 @@ public class Backtracking_Arrays {
     }
 
     public static void changeArray(int arr[], int index, int value) {
-        System.out.println("Testing...");
+        // Base Case:
+        if (index == arr.length) {
+            printArray(arr);
+            return;
+        }
+
+        // Recursion:
+        arr[index] = value;
+        changeArray(arr, index + 1, value + 1);
+        arr[index] = arr[index] - 2;
     }
 
     public static void main(String[] args) {
