@@ -47,23 +47,55 @@ public class N_Queens {
         System.out.println("┘\n");
     }
 
+    public static boolean isSafe(char chess_board[][], int row, int col) {
+        // Vertical Up:
+        for (int i = row - 1; i >= 0; i --) {
+            if (chess_board[i][col] == 'Q') {
+                return false;
+            }
+        }
+
+        // Diagonal Left Up:
+        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i --, j --) {
+            if (chess_board[i][j] == 'Q') {
+                return false;
+            }
+        }
+
+        // Diagonal Right Up:
+        for (int i = row - 1, j = col + 1; i >= 0 && j < chess_board.length; i --, j ++) {
+            if (chess_board[i][j] == 'Q') {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static void N_Queens_Algo(char chess_board[][], int row) {
         // Base Case:
         if (row == chess_board.length) {
+            totalWays++;
+            System.out.println("Solution #" + totalWays);
             PrintBoard(chess_board);
             return;
         }
 
         // Column Loop:
         for (int i = 0; i < chess_board.length; i ++) {
-            chess_board[row][i] = 'Q';
-            N_Queens_Algo(chess_board, row + 1); // function call
-            chess_board[row][i] = '.'; // backtracking step
+            if (isSafe(chess_board, row, i)) {
+                chess_board[row][i] = 'Q';
+                N_Queens_Algo(chess_board, row + 1); // function call
+                chess_board[row][i] = '.'; // backtracking step
+            }
         }
     }
 
+    static int totalWays = 0;
     public static void main(String[] args) {
-        int n = 2;
+        System.out.println("\nN Queens Algorithm - All Ways:\n");
+
+        int n = 4;
         char chess_board[][] = new char[n][n];
         int row = 0;
 
@@ -75,5 +107,6 @@ public class N_Queens {
         }
 
         N_Queens_Algo(chess_board, row);
+        System.out.println("Total ways = " + totalWays);
     }
 }
