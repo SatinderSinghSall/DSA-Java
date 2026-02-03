@@ -106,7 +106,7 @@ public class N_Queens {
             }
         }
 
-        N_Queens_Algo(chess_board, row);
+        N_Queens_Algo(chess_board, row); // TC = O(n!)
         System.out.println("Total ways = " + totalWays);
     }
 }
