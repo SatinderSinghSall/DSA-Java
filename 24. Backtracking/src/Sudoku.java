@@ -8,7 +8,7 @@ public class Sudoku {
         for (int digit = 1; digit <= 9; digit ++) {
             if (isSafe(sudoku, row, col, digit)) {
                 sudoku[row][col] = digit;
-                SudokuSolver(sudoku, , col);
+                SudokuSolver(sudoku, row, col);
             }
         }
     }
