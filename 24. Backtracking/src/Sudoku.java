@@ -1,18 +1,6 @@
 // Sudoku Algorithm.
 
 public class Sudoku {
-    public static boolean SudokuSolver(int sudoku[][], int row, int col) {
-        // Base Case:
-
-        // Recursion Work:
-        for (int digit = 1; digit <= 9; digit ++) {
-            if (isSafe(sudoku, row, col, digit)) {
-                sudoku[row][col] = digit;
-                SudokuSolver(sudoku, row, col);
-            }
-        }
-    }
-
     public static void main(String[] args) {
         int sudoku[][] = {
                 {0, 0, 8, 0, 0, 0, 0, 0, 0},
