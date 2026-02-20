@@ -33,5 +33,13 @@ public class ArrayLists_Java {
         // 5. Contains Element: O(n)
         System.out.println(list.contains(1));
         System.out.println(list.contains(11));
+
+        // Size of Array List:
+        System.out.println(list.size());
+
+        // Print ArrayList using loop:
+        for (int i = 0; i < list.size(); i ++) {
+            System.out.print(list.get(i) + " ");
+        }
     }
 }
