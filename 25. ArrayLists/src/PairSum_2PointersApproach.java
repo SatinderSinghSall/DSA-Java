@@ -29,8 +29,6 @@ public class PairSum_2PointersApproach {
     }
 
     public static void main(String[] args) {
-        System.out.println("Testing...");
-
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 6, 8, 9)); // sorted list
         int target = 10;
 
