@@ -10,6 +10,7 @@ public class PairSum_2PointersApproach {
         int left = 0;
         int right = list.size() - 1;
 
+        // Time Complexity: O(n)
         while (left < right) {
             int sum = list.get(left) + list.get(right);
 
