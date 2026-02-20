@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class PairSum_BruteForce {
     public static boolean PairSum(ArrayList<Integer> list, int target) {
         for(int i = 0; i < list.size(); i ++) {
+            // Time Complexity: O(n^2)
             for(int j = i + 1; j < list.size(); j ++) {
                 if(list.get(i) + list.get(j) == target) {
                     return true;
