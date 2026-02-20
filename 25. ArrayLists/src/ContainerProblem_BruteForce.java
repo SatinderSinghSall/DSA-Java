@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class ContainerProblem_BruteForce {
     public static int storeWater(ArrayList<Integer> height) {
+        // Time Complexity: O(n^2)
         int maxWater = 0;
         for(int i = 0; i < height.size(); i ++) {
             for(int j = 1; j < height.size(); j ++) {
