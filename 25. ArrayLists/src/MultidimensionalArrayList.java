@@ -26,6 +26,7 @@ public class MultidimensionalArrayList {
             for(int j = 0; j < currList.size(); j ++) {
                 System.out.print(currList.get(j) + " ");
             }
+            System.out.println();
         }
     }
 }
