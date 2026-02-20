@@ -28,5 +28,7 @@ public class MultidimensionalArrayList {
             }
             System.out.println();
         }
+
+        System.out.println(mainList);
     }
 }
