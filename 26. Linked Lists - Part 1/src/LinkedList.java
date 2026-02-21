@@ -11,7 +11,30 @@ public class LinkedList {
         }
     }
 
+    // Head & Tail of a Linked List:
+    public static Node head;
+    public static Node tail;
+
+    public void addFirst(int data) {
+        // Step 1 - Create a new Node:
+        Node newNode = new Node(data);
+
+        if(head == null) {
+            head = tail = newNode;
+            return;
+        }
+
+        // Step 2 - newNode next = head
+        newNode.next = head; // linked
+
+        // Step 3 - head = newNode
+        head = newNode;
+    }
+
     public static void main(String[] args) {
-        System.out.println("Testing...main");
+        LinkedList linkedList = new LinkedList();
+
+        linkedList.addFirst(1);
+        linkedList.addFirst(2);
     }
 }
