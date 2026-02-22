@@ -15,6 +15,19 @@ public class LinkedList {
     public static Node head;
     public static Node tail;
 
+    // Printing a Linked List:
+    public static void PrintLinkedList() {
+        if(head == null) {
+            System.out.println("Linked List is Empty.");
+        }
+
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+
     // Add first in Linked List.
     public void addFirst(int data) {
         // Step 1 - Create a new Node:
@@ -56,5 +69,7 @@ public class LinkedList {
         linkedList.addFirst(1);
         linkedList.addLast(3);
         linkedList.addLast(4);
+
+        PrintLinkedList();
     }
 }
