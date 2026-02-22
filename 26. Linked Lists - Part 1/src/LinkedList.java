@@ -16,9 +16,10 @@ public class LinkedList {
     public static Node tail;
 
     // Printing a Linked List:
-    public static void PrintLinkedList() {
+    public void PrintLinkedList() {
         if(head == null) {
             System.out.println("Linked List is Empty.");
+            return;
         }
 
         Node temp = head;
@@ -26,6 +27,7 @@ public class LinkedList {
             System.out.print(temp.data + " ");
             temp = temp.next;
         }
+        System.out.println();
     }
 
     // Add first in Linked List.
@@ -65,11 +67,18 @@ public class LinkedList {
     public static void main(String[] args) {
         LinkedList linkedList = new LinkedList();
 
+        linkedList.PrintLinkedList();
         linkedList.addFirst(2);
+
+        linkedList.PrintLinkedList();
         linkedList.addFirst(1);
+
+        linkedList.PrintLinkedList();
         linkedList.addLast(3);
+
+        linkedList.PrintLinkedList();
         linkedList.addLast(4);
 
-        PrintLinkedList();
+        linkedList.PrintLinkedList();
     }
 }
