@@ -64,6 +64,11 @@ public class LinkedList {
         tail = newNode;
     }
 
+    // Add in the Middle of Linked List:
+    public void addMiddle(int data) {
+
+    }
+
     public static void main(String[] args) {
         LinkedList linkedList = new LinkedList();
 
