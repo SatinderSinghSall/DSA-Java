@@ -65,8 +65,34 @@ public class LinkedList {
     }
 
     // Add in the Middle of Linked List:
-    public void addMiddle(int data) {
+    public void addMiddle(int idx, int data) {
+        if (idx == 0) {
+            addFirst(data);
+            return;
+        }
 
+        Node newNode = new Node(data);
+        Node temp = head;
+        int i = 0;
+
+        while (temp != null && i < idx - 1) {
+            temp = temp.next;
+            i++;
+        }
+
+        // invalid index
+        if (temp == null) {
+            System.out.println("Invalid index!");
+            return;
+        }
+
+        newNode.next = temp.next;
+        temp.next = newNode;
+
+        // update tail if inserted at last
+        if (newNode.next == null) {
+            tail = newNode;
+        }
     }
 
     public static void main(String[] args) {
@@ -83,6 +109,8 @@ public class LinkedList {
 
         linkedList.PrintLinkedList();
         linkedList.addLast(4);
+
+        linkedList.addMiddle(2, 9);
 
         linkedList.PrintLinkedList();
     }
