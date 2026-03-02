@@ -14,6 +14,7 @@ public class LinkedList {
     // Head & Tail of a Linked List:
     public static Node head;
     public static Node tail;
+    public static int size;
 
     // Printing a Linked List:
     public void PrintLinkedList() {
@@ -34,6 +35,7 @@ public class LinkedList {
     public void addFirst(int data) {
         // Step 1 - Create a new Node:
         Node newNode = new Node(data);
+        size ++;
 
         if(head == null) {
             head = tail = newNode;
@@ -51,6 +53,7 @@ public class LinkedList {
     public void addLast(int data) {
         // Step 1 - Create a new Node:
         Node newNode = new Node(data);
+        size ++;
 
         if(head == null) {
             head = tail = newNode;
@@ -70,8 +73,9 @@ public class LinkedList {
             addFirst(data);
             return;
         }
-
         Node newNode = new Node(data);
+        size ++;
+
         Node temp = head;
         int i = 0;
 
@@ -105,13 +109,15 @@ public class LinkedList {
         linkedList.addFirst(1);
 
         linkedList.PrintLinkedList();
-        linkedList.addLast(3);
+        linkedList.addLast(5);
 
         linkedList.PrintLinkedList();
-        linkedList.addLast(4);
+        linkedList.addLast(5);
 
-        linkedList.addMiddle(2, 9);
+        linkedList.addMiddle(2, 3);
 
         linkedList.PrintLinkedList();
+
+        System.out.println("\nSize of Linked List: " + linkedList.size);
     }
 }
