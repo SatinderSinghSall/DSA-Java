@@ -99,6 +99,23 @@ public class LinkedList {
         }
     }
 
+    public int removeFirst() {
+        if (size == 0) {
+            System.out.println("\nLinklist is Empty.");
+            return Integer.MIN_VALUE;
+        } else if (size == 1) {
+            int val = head.data;
+            head = tail = null;
+            size ++;
+            return val;
+        }
+
+        int val = head.data;
+        head = head.next;
+        size --;
+        return val;
+    }
+
     public static void main(String[] args) {
         LinkedList linkedList = new LinkedList();
 
@@ -116,6 +133,11 @@ public class LinkedList {
 
         linkedList.addMiddle(2, 3);
 
+        System.out.println();
+        linkedList.PrintLinkedList();
+
+        System.out.println();
+        linkedList.removeFirst();
         linkedList.PrintLinkedList();
 
         System.out.println("\nSize of Linked List: " + linkedList.size);
