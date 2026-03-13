@@ -1,7 +1,7 @@
 /*
  Detect Cycle in Linked List:
- Using Floyd’s Cycle Finding Algorithm &
- Approach: Slow and Fast Pointer Approach.
+ - Using Floyd’s Cycle Finding Algorithm &
+   Approach: Slow and Fast Pointer Approach.
 */
 
 public class CycleLinkedList {
