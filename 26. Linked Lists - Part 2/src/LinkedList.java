@@ -1,10 +1,6 @@
-/*
- Detect Cycle in Linked List:
- - Using Floyd’s Cycle Finding Algorithm &
-   Approach: Slow and Fast Pointer Approach.
-*/
+// Linked List:
 
-public class CycleLinkedList {
+public class LinkedList {
     public static class Node {
         int data;
         Node next;
@@ -145,30 +141,32 @@ public class CycleLinkedList {
         return val;
     }
 
-    // Floyd’s Cycle Detection Method:
-    public static boolean isCycle() {
-        Node slow = head;
-        Node fast = head;
-
-        while (fast != null && fast.next != null) {
-            slow = slow.next;        // move 1 step
-            fast = fast.next.next;   // move 2 steps
-
-            if (slow == fast) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public static void main(String[] args) {
-        // Cycle Linked List:
-        head = new Node(1);
-        head.next = new Node(2);
-        head.next.next = new Node(3);
-        head.next.next.next = head; // 1->2->3->1
+        LinkedList linkedList = new LinkedList();
 
-        System.out.println(isCycle());
+        linkedList.PrintLinkedList();
+        linkedList.addFirst(2);
+
+        linkedList.PrintLinkedList();
+        linkedList.addFirst(1);
+
+        linkedList.PrintLinkedList();
+        linkedList.addLast(5);
+
+        linkedList.PrintLinkedList();
+        linkedList.addLast(5);
+
+        linkedList.addMiddle(2, 3);
+
+        System.out.println();
+        linkedList.PrintLinkedList();
+
+        System.out.println();
+        linkedList.removeFirst();
+        linkedList.PrintLinkedList();
+
+        System.out.println();
+        linkedList.removeLast();
+        linkedList.PrintLinkedList();
     }
 }
