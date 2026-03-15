@@ -1,9 +1,9 @@
 /*
- Detect Cycle in Linked List
+ Detect & Remove Cycle in Linked List
  Using Floyd’s Cycle Finding Algorithm
 */
 
-public class CycleLinkedList {
+public class CycleLinkedList2 {
 
     static class Node {
         int data;
@@ -17,14 +17,38 @@ public class CycleLinkedList {
 
     static Node head;
 
+    // Print limited nodes (useful when cycle exists)
+    public static void printListLimited(int limit) {
+        Node temp = head;
+        int count = 0;
+
+        while (temp != null && count < limit) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+            count++;
+        }
+        System.out.println("...");
+    }
+
+    // Print normal linked list (no cycle)
+    public static void printList() {
+        Node temp = head;
+
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+
     // Floyd’s Cycle Detection
     public static boolean isCycle() {
         Node slow = head;
         Node fast = head;
 
         while (fast != null && fast.next != null) {
-            slow = slow.next;       // move 1 step
-            fast = fast.next.next;  // move 2 steps
+            slow = slow.next;
+            fast = fast.next.next;
 
             if (slow == fast) {
                 return true;
@@ -50,22 +74,18 @@ public class CycleLinkedList {
             }
         }
 
-        if (!cycle) {
-            return;
-        }
+        if (!cycle) return;
 
         slow = head;
         Node prev = null;
 
-        // find starting point of cycle
         while (slow != fast) {
             prev = fast;
             slow = slow.next;
             fast = fast.next;
         }
 
-        // remove cycle
-        prev.next = null;
+        prev.next = null; // break the cycle
     }
 
     public static void main(String[] args) {
@@ -75,14 +95,18 @@ public class CycleLinkedList {
         Node temp = new Node(2);
         head.next = temp;
         temp.next = new Node(3);
+        temp.next.next = temp; // cycle
 
-        // create cycle
-        temp.next.next = temp;
+        System.out.println("Before removing cycle:");
+        printListLimited(10);
 
-        System.out.println("Cycle present: " + isCycle());
+        System.out.println("Cycle present? " + isCycle());
 
         removeCycle();
 
-        System.out.println("Cycle present after removal: " + isCycle());
+        System.out.println("\nAfter removing cycle:");
+        printList();
+
+        System.out.println("Cycle present? " + isCycle());
     }
 }
