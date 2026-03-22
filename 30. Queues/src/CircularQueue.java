@@ -7,22 +7,29 @@ public class CircularQueue {
         static int rear;
         static int front;
 
+        // Constructor
         Queue(int n) {
             arr = new int[n];
             size = n;
             rear = -1;
             front = -1;
         }
+        // Time: O(n)  (array creation)
+        // Space: O(n)
 
         // Method to check if Queue is Empty.
         public static boolean isEmpty() {
             return rear == -1 && front == -1;
         }
+        // Time: O(1)
+        // Space: O(1)
 
         // Method to check if Queue is Full.
         public static boolean isFull() {
-            return (rear + 1)  % size == front;
+            return (rear + 1) % size == front;
         }
+        // Time: O(1)
+        // Space: O(1)
 
         // Add Method:
         public static void add(int data) {
@@ -39,6 +46,8 @@ public class CircularQueue {
             rear = (rear + 1) % size;
             arr[rear] = data;
         }
+        // Time: O(1)
+        // Space: O(1)
 
         // Remove Method:
         public static int remove() {
@@ -58,6 +67,8 @@ public class CircularQueue {
 
             return result;
         }
+        // Time: O(1)
+        // Space: O(1)
 
         // Peek Method:
         public static int peek() {
@@ -68,6 +79,8 @@ public class CircularQueue {
 
             return arr[front];
         }
+        // Time: O(1)
+        // Space: O(1)
     }
 
     public static void main(String[] args) {
