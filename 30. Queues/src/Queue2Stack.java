@@ -1,4 +1,4 @@
-// Queue: Implementing a Queue using 2 Stack.
+// Queue: Implementing a Queue using 2 Stacks.
 
 import java.util.Stack;
 
