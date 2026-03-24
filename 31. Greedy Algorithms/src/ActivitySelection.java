@@ -1,4 +1,4 @@
-// Greedy Algorithm Problem - Activity Selection.
+// Greedy Algorithm Problem - Activity Selection. TC = O(n)
 
 import java.util.ArrayList;
 
