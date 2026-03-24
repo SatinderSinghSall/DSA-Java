@@ -13,6 +13,612 @@
 
 ---
 
+# Greedy Algorithms in Java
+
+A comprehensive academic and practical guide to **Greedy Algorithms**, covering theoretical foundations, algorithm design principles, pseudocode, and Java implementations.
+
+This repository is designed for:
+
+- Computer Science students
+- Software engineering interviews
+- Competitive programming
+- Algorithm coursework
+
+---
+
+# Table of Contents
+
+1. Introduction to Greedy Algorithms
+2. Properties of Greedy Algorithms
+3. When Greedy Algorithms Work
+4. Algorithm Design Template
+5. Problems and Implementations
+   - Coin Change (Greedy Approach)
+   - Activity Selection
+   - Fractional Knapsack
+   - Huffman Coding
+   - Minimum Spanning Tree (Kruskal)
+
+6. Greedy vs Dynamic Programming
+7. Time Complexity Analysis
+8. References
+
+---
+
+# 1. Introduction
+
+A **Greedy Algorithm** is an algorithmic paradigm that builds up a solution piece by piece, **always choosing the locally optimal option at each step** with the expectation that this will lead to a **globally optimal solution**.
+
+Unlike dynamic programming, greedy algorithms **do not reconsider earlier decisions**.
+
+### Core Principle
+
+At each step, choose the option that provides the **best immediate benefit**.
+
+---
+
+# 2. Properties of Greedy Algorithms
+
+A problem can typically be solved using a greedy approach if it satisfies two properties.
+
+## Greedy Choice Property
+
+A globally optimal solution can be obtained by **making locally optimal choices**.
+
+## Optimal Substructure
+
+An optimal solution contains **optimal solutions to its subproblems**.
+
+---
+
+# 3. When Greedy Algorithms Work
+
+Greedy algorithms are effective in problems involving:
+
+- Optimization
+- Scheduling
+- Graphs
+- Resource allocation
+
+Common techniques used with greedy algorithms:
+
+- Sorting
+- Priority queues
+- Graph traversal
+
+---
+
+# 4. Greedy Algorithm Design Template
+
+General greedy strategy:
+
+```
+1. Define the objective function.
+2. Sort or structure the data.
+3. Repeatedly choose the locally optimal option.
+4. Add it to the solution if feasible.
+5. Continue until the solution is complete.
+```
+
+---
+
+# 5. Problem Implementations
+
+---
+
+# Problem 1: Coin Change (Greedy Approach)
+
+## Problem Statement
+
+Given a set of coin denominations and a target amount, determine the minimum number of coins required to make that amount using a greedy approach.
+
+Example:
+
+```
+Coins: 1, 2, 5, 10, 20, 50, 100, 500
+Amount: 275
+```
+
+Goal: Minimize the number of coins.
+
+---
+
+## Algorithm
+
+1. Sort coins in descending order.
+2. Pick the largest coin smaller than or equal to the remaining amount.
+3. Subtract it from the total.
+4. Repeat until the amount becomes zero.
+
+---
+
+## Pseudocode
+
+```
+GreedyCoinChange(coins, amount):
+
+    result = empty list
+
+    for coin from largest to smallest:
+        while amount >= coin:
+            add coin to result
+            amount = amount - coin
+
+    return result
+```
+
+---
+
+## Java Implementation
+
+```java
+import java.util.*;
+
+public class CoinChangeGreedy {
+
+    public static void main(String[] args) {
+
+        int amount = 275;
+
+        int[] coins = {1,2,5,10,20,50,100,500};
+
+        List<Integer> result = new ArrayList<>();
+
+        for(int i = coins.length - 1; i >= 0; i--) {
+
+            while(amount >= coins[i]) {
+                amount -= coins[i];
+                result.add(coins[i]);
+            }
+
+        }
+
+        System.out.println("Coins used: " + result);
+    }
+}
+```
+
+---
+
+# Problem 2: Activity Selection
+
+## Problem Statement
+
+Given a set of activities with start and finish times, select the **maximum number of activities** that can be performed without overlapping.
+
+Example:
+
+```
+Activity  Start  End
+A1        1      4
+A2        3      5
+A3        0      6
+A4        5      7
+A5        8      9
+```
+
+---
+
+## Algorithm
+
+1. Sort activities by **finish time**.
+2. Select the first activity.
+3. For each remaining activity:
+   - If its start time ≥ finish time of last selected activity → select it.
+
+---
+
+## Pseudocode
+
+```
+ActivitySelection(activities):
+
+    sort activities by finish time
+
+    select first activity
+    lastFinish = finish time of first activity
+
+    for each activity in activities:
+        if activity.start >= lastFinish:
+            select activity
+            lastFinish = activity.finish
+```
+
+---
+
+## Java Implementation
+
+```java
+import java.util.*;
+
+class Activity {
+    int start;
+    int end;
+
+    Activity(int s, int e) {
+        start = s;
+        end = e;
+    }
+}
+
+public class ActivitySelection {
+
+    public static void main(String[] args) {
+
+        Activity[] activities = {
+            new Activity(1,4),
+            new Activity(3,5),
+            new Activity(0,6),
+            new Activity(5,7),
+            new Activity(8,9)
+        };
+
+        Arrays.sort(activities, Comparator.comparingInt(a -> a.end));
+
+        int count = 1;
+        int lastEnd = activities[0].end;
+
+        for(int i=1;i<activities.length;i++) {
+
+            if(activities[i].start >= lastEnd) {
+                count++;
+                lastEnd = activities[i].end;
+            }
+
+        }
+
+        System.out.println("Maximum activities: " + count);
+    }
+}
+```
+
+---
+
+# Problem 3: Fractional Knapsack
+
+## Problem Statement
+
+Given items with values and weights and a knapsack with capacity **W**, maximize the total value.
+
+Unlike the 0/1 knapsack problem, **fractions of items can be taken**.
+
+---
+
+## Algorithm
+
+1. Compute value/weight ratio for each item.
+2. Sort items in descending order of ratio.
+3. Pick items fully until capacity is reached.
+4. Take fraction of the next item if necessary.
+
+---
+
+## Pseudocode
+
+```
+FractionalKnapsack(items, capacity):
+
+    sort items by value/weight ratio
+
+    totalValue = 0
+
+    for each item:
+        if capacity >= item.weight:
+            capacity -= item.weight
+            totalValue += item.value
+        else:
+            totalValue += ratio * capacity
+            break
+
+    return totalValue
+```
+
+---
+
+## Java Implementation
+
+```java
+import java.util.*;
+
+class Item {
+    int value;
+    int weight;
+
+    Item(int v, int w) {
+        value = v;
+        weight = w;
+    }
+}
+
+public class FractionalKnapsack {
+
+    public static void main(String[] args) {
+
+        Item[] items = {
+            new Item(60,10),
+            new Item(100,20),
+            new Item(120,30)
+        };
+
+        int capacity = 50;
+
+        Arrays.sort(items, (a,b) ->
+                Double.compare((double)b.value/b.weight,
+                               (double)a.value/a.weight));
+
+        double totalValue = 0;
+
+        for(Item item : items) {
+
+            if(capacity >= item.weight) {
+                capacity -= item.weight;
+                totalValue += item.value;
+            }
+            else {
+                totalValue += ((double)item.value/item.weight) * capacity;
+                break;
+            }
+
+        }
+
+        System.out.println("Maximum value: " + totalValue);
+    }
+}
+```
+
+---
+
+# Problem 4: Huffman Coding
+
+## Problem Statement
+
+Given characters and their frequencies, construct a **binary tree that minimizes the weighted path length**, enabling optimal data compression.
+
+Used in:
+
+- ZIP
+- JPEG
+- MP3
+
+---
+
+## Algorithm
+
+1. Insert all characters into a **min-heap based on frequency**.
+2. Extract two nodes with smallest frequency.
+3. Merge them into a new node.
+4. Insert the new node back into the heap.
+5. Repeat until only one node remains.
+
+---
+
+## Pseudocode
+
+```
+HuffmanCoding(chars, freq):
+
+    create minHeap
+
+    insert all nodes into heap
+
+    while heap size > 1:
+
+        left = extractMin()
+        right = extractMin()
+
+        newNode.freq = left.freq + right.freq
+        newNode.left = left
+        newNode.right = right
+
+        insert newNode
+
+    return root
+```
+
+---
+
+## Java Implementation
+
+```java
+import java.util.*;
+
+class Node {
+    int freq;
+    char ch;
+    Node left;
+    Node right;
+
+    Node(char c, int f) {
+        ch = c;
+        freq = f;
+    }
+}
+
+public class HuffmanCoding {
+
+    public static void main(String[] args) {
+
+        char[] chars = {'a','b','c','d','e','f'};
+        int[] freq = {5,9,12,13,16,45};
+
+        PriorityQueue<Node> pq =
+                new PriorityQueue<>(Comparator.comparingInt(n -> n.freq));
+
+        for(int i=0;i<chars.length;i++) {
+            pq.add(new Node(chars[i], freq[i]));
+        }
+
+        while(pq.size() > 1) {
+
+            Node left = pq.poll();
+            Node right = pq.poll();
+
+            Node parent = new Node('-', left.freq + right.freq);
+            parent.left = left;
+            parent.right = right;
+
+            pq.add(parent);
+        }
+
+        System.out.println("Huffman Tree constructed.");
+    }
+}
+```
+
+---
+
+# Problem 5: Minimum Spanning Tree (Kruskal Algorithm)
+
+## Problem Statement
+
+Given a connected weighted graph, find a subset of edges that:
+
+- Connects all vertices
+- Has **minimum total weight**
+- Contains **no cycles**
+
+---
+
+## Algorithm
+
+1. Sort edges by weight.
+2. Initialize disjoint sets.
+3. Pick smallest edge.
+4. If it does not form a cycle, add it to MST.
+5. Continue until V−1 edges are selected.
+
+---
+
+## Pseudocode
+
+```
+Kruskal(graph):
+
+    sort edges by weight
+
+    initialize disjoint sets
+
+    for each edge:
+        if find(u) != find(v):
+            add edge to MST
+            union(u, v)
+```
+
+---
+
+## Java Implementation
+
+```java
+import java.util.*;
+
+class Edge {
+    int src;
+    int dest;
+    int weight;
+
+    Edge(int s, int d, int w) {
+        src = s;
+        dest = d;
+        weight = w;
+    }
+}
+
+public class Kruskal {
+
+    static int find(int parent[], int i) {
+
+        if(parent[i] == i)
+            return i;
+
+        return parent[i] = find(parent, parent[i]);
+    }
+
+    static void union(int parent[], int x, int y) {
+        parent[find(parent,x)] = find(parent,y);
+    }
+
+    public static void main(String[] args) {
+
+        Edge[] edges = {
+            new Edge(0,1,10),
+            new Edge(0,2,6),
+            new Edge(0,3,5),
+            new Edge(1,3,15),
+            new Edge(2,3,4)
+        };
+
+        Arrays.sort(edges, Comparator.comparingInt(e -> e.weight));
+
+        int[] parent = new int[4];
+
+        for(int i=0;i<4;i++)
+            parent[i] = i;
+
+        int mstWeight = 0;
+
+        for(Edge edge : edges) {
+
+            int x = find(parent, edge.src);
+            int y = find(parent, edge.dest);
+
+            if(x != y) {
+                mstWeight += edge.weight;
+                union(parent, x, y);
+            }
+
+        }
+
+        System.out.println("MST Weight: " + mstWeight);
+    }
+}
+```
+
+---
+
+# 6. Greedy vs Dynamic Programming
+
+| Feature                     | Greedy        | Dynamic Programming |
+| --------------------------- | ------------- | ------------------- |
+| Decision making             | Local optimal | Global optimal      |
+| Reconsideration             | No            | Yes                 |
+| Speed                       | Faster        | Slower              |
+| Guarantees optimal solution | Not always    | Yes                 |
+
+---
+
+# 7. Time Complexity
+
+| Algorithm           | Time Complexity |
+| ------------------- | --------------- |
+| Coin Change         | O(n)            |
+| Activity Selection  | O(n log n)      |
+| Fractional Knapsack | O(n log n)      |
+| Huffman Coding      | O(n log n)      |
+| Kruskal             | O(E log E)      |
+
+---
+
+# 8. References
+
+- Thomas H. Cormen — _Introduction to Algorithms_
+- Kleinberg & Tardos — _Algorithm Design_
+- CLRS Greedy Algorithms Chapter
+- Stanford Algorithms Course
+- MIT OpenCourseWare Algorithms
+
+---
+
+If you'd like, I can also help you **turn this into a complete GitHub repository with**:
+
+- Proper **directory structure**
+- **Separate Java files**
+- **Complexity analysis**
+- **algorithm diagrams**
+- **20–30 additional greedy problems**
+- **GitHub badges + academic formatting**.
+
+---
+
 # 📖 Overview
 
 This repository/module provides a **complete academic and practical understanding of Greedy Algorithms**, covering:
@@ -357,3 +963,581 @@ Educational & portfolio use
 ---
 
 ⭐ _Star this repo if it helped you understand Greedy Algorithms deeply!_
+
+Below is a **comprehensive guide to Greedy Algorithms in Java**, starting from the fundamentals and progressing to advanced patterns used in interviews and competitive programming.
+
+---
+
+# Greedy Algorithms in Java: Complete Guide (Beginner → Advanced)
+
+## 1. What is a Greedy Algorithm?
+
+A **Greedy Algorithm** builds a solution **step-by-step**, always choosing the **locally optimal choice** at each step with the hope that it leads to a **globally optimal solution**.
+
+### Key Idea
+
+> Make the best choice **right now** without reconsidering past decisions.
+
+### Characteristics
+
+Greedy algorithms work when the problem satisfies:
+
+1. **Greedy Choice Property**
+   A global optimum can be reached by choosing a local optimum.
+
+2. **Optimal Substructure**
+   Optimal solution of the problem contains optimal solutions to subproblems.
+
+---
+
+# 2. Basic Structure of Greedy Algorithm
+
+General pattern:
+
+```
+1. Sort the input (often required)
+2. Pick the best possible option
+3. Update the solution
+4. Repeat until problem solved
+```
+
+---
+
+# 3. Simple Example: Coin Change (Greedy Version)
+
+Goal: Use minimum coins to make an amount.
+
+Coins:
+`{1, 2, 5, 10, 20, 50, 100, 500}`
+
+### Java Implementation
+
+```java
+import java.util.*;
+
+public class CoinChangeGreedy {
+
+    public static void main(String[] args) {
+
+        int amount = 275;
+        int coins[] = {1,2,5,10,20,50,100,500};
+
+        List<Integer> result = new ArrayList<>();
+
+        for(int i = coins.length - 1; i >= 0; i--) {
+            while(amount >= coins[i]) {
+                amount -= coins[i];
+                result.add(coins[i]);
+            }
+        }
+
+        System.out.println("Coins used: " + result);
+    }
+}
+```
+
+### Time Complexity
+
+```
+O(n)
+```
+
+---
+
+# 4. Classic Greedy Problem: Activity Selection
+
+Problem:
+Select **maximum number of activities** that don't overlap.
+
+### Steps
+
+1. Sort by **finish time**
+2. Pick first activity
+3. Pick next activity with start ≥ last finish
+
+---
+
+### Java Implementation
+
+```java
+import java.util.*;
+
+class Activity {
+    int start, end;
+
+    Activity(int s, int e) {
+        start = s;
+        end = e;
+    }
+}
+
+public class ActivitySelection {
+
+    public static void main(String[] args) {
+
+        Activity[] arr = {
+            new Activity(1,4),
+            new Activity(3,5),
+            new Activity(0,6),
+            new Activity(5,7),
+            new Activity(8,9)
+        };
+
+        Arrays.sort(arr, Comparator.comparingInt(a -> a.end));
+
+        int count = 1;
+        int lastEnd = arr[0].end;
+
+        for(int i=1;i<arr.length;i++){
+            if(arr[i].start >= lastEnd){
+                count++;
+                lastEnd = arr[i].end;
+            }
+        }
+
+        System.out.println("Max activities: " + count);
+    }
+}
+```
+
+### Time Complexity
+
+```
+O(n log n)
+```
+
+---
+
+# 5. Fractional Knapsack (Important Greedy Problem)
+
+In this problem:
+You **can take fractions of items**.
+
+### Greedy Strategy
+
+Choose item with **highest value/weight ratio**.
+
+---
+
+### Java Implementation
+
+```java
+import java.util.*;
+
+class Item {
+    int value, weight;
+
+    Item(int v, int w){
+        value = v;
+        weight = w;
+    }
+}
+
+public class FractionalKnapsack {
+
+    public static void main(String[] args) {
+
+        int capacity = 50;
+
+        Item items[] = {
+            new Item(60,10),
+            new Item(100,20),
+            new Item(120,30)
+        };
+
+        Arrays.sort(items, (a,b) ->
+            Double.compare((double)b.value/b.weight, (double)a.value/a.weight));
+
+        double totalValue = 0;
+
+        for(Item item : items){
+
+            if(capacity >= item.weight){
+                capacity -= item.weight;
+                totalValue += item.value;
+            }
+            else{
+                totalValue += ((double)item.value/item.weight) * capacity;
+                break;
+            }
+        }
+
+        System.out.println("Max value: " + totalValue);
+    }
+}
+```
+
+### Time Complexity
+
+```
+O(n log n)
+```
+
+---
+
+# 6. Huffman Coding (Advanced Greedy)
+
+Used in **data compression**.
+
+Examples:
+
+- ZIP files
+- JPEG
+- MP3
+
+### Idea
+
+Characters with **higher frequency → shorter codes**
+
+Uses:
+
+```
+Priority Queue (Min Heap)
+```
+
+---
+
+### Java Implementation
+
+```java
+import java.util.*;
+
+class Node {
+    int freq;
+    char ch;
+    Node left, right;
+
+    Node(char c, int f){
+        ch = c;
+        freq = f;
+    }
+}
+
+public class HuffmanCoding {
+
+    public static void main(String[] args){
+
+        char[] chars = {'a','b','c','d','e','f'};
+        int[] freq = {5,9,12,13,16,45};
+
+        PriorityQueue<Node> pq =
+            new PriorityQueue<>(Comparator.comparingInt(n -> n.freq));
+
+        for(int i=0;i<chars.length;i++){
+            pq.add(new Node(chars[i], freq[i]));
+        }
+
+        while(pq.size() > 1){
+
+            Node left = pq.poll();
+            Node right = pq.poll();
+
+            Node parent = new Node('-', left.freq + right.freq);
+            parent.left = left;
+            parent.right = right;
+
+            pq.add(parent);
+        }
+
+        System.out.println("Huffman Tree Built");
+    }
+}
+```
+
+---
+
+# 7. Minimum Spanning Tree (Greedy)
+
+Two major algorithms:
+
+| Algorithm | Strategy    |
+| --------- | ----------- |
+| Kruskal   | Sort edges  |
+| Prim      | Expand tree |
+
+---
+
+## Kruskal Algorithm
+
+Uses:
+
+```
+Sorting + Union Find
+```
+
+### Java Code
+
+```java
+import java.util.*;
+
+class Edge {
+    int src, dest, weight;
+
+    Edge(int s, int d, int w){
+        src = s;
+        dest = d;
+        weight = w;
+    }
+}
+
+public class Kruskal {
+
+    static int find(int parent[], int i){
+        if(parent[i] == i)
+            return i;
+        return parent[i] = find(parent, parent[i]);
+    }
+
+    static void union(int parent[], int x, int y){
+        int xset = find(parent, x);
+        int yset = find(parent, y);
+        parent[xset] = yset;
+    }
+
+    public static void main(String[] args){
+
+        Edge edges[] = {
+            new Edge(0,1,10),
+            new Edge(0,2,6),
+            new Edge(0,3,5),
+            new Edge(1,3,15),
+            new Edge(2,3,4)
+        };
+
+        Arrays.sort(edges, Comparator.comparingInt(e -> e.weight));
+
+        int parent[] = new int[4];
+
+        for(int i=0;i<4;i++)
+            parent[i] = i;
+
+        int mstWeight = 0;
+
+        for(Edge edge : edges){
+
+            int x = find(parent, edge.src);
+            int y = find(parent, edge.dest);
+
+            if(x != y){
+                mstWeight += edge.weight;
+                union(parent, x, y);
+            }
+        }
+
+        System.out.println("MST weight: " + mstWeight);
+    }
+}
+```
+
+---
+
+# 8. Common Greedy Problem Patterns
+
+## 1. Sorting + Selection
+
+Examples:
+
+- Activity selection
+- Meeting rooms
+- Job sequencing
+
+---
+
+## 2. Priority Queue
+
+Examples:
+
+- Huffman coding
+- Merge k sorted lists
+- Min cost ropes
+
+---
+
+## 3. Interval Scheduling
+
+Examples:
+
+- Non-overlapping intervals
+- Minimum arrows to burst balloons
+
+---
+
+## 4. Graph Greedy
+
+Examples:
+
+- Prim's algorithm
+- Kruskal algorithm
+- Dijkstra algorithm
+
+---
+
+# 9. Important Greedy Interview Problems
+
+| Problem                       | Platform  |
+| ----------------------------- | --------- |
+| Activity Selection            | Classic   |
+| Fractional Knapsack           | Classic   |
+| Job Sequencing with Deadlines | Interview |
+| Minimum Platforms             | Interview |
+| Gas Station                   | LeetCode  |
+| Candy Distribution            | LeetCode  |
+| Jump Game                     | LeetCode  |
+| Minimum Arrows                | LeetCode  |
+| Reorganize String             | LeetCode  |
+
+---
+
+# 10. Greedy vs Dynamic Programming
+
+| Feature            | Greedy           | DP             |
+| ------------------ | ---------------- | -------------- |
+| Decision           | Local optimum    | Global optimum |
+| Speed              | Faster           | Slower         |
+| Complexity         | Often O(n log n) | Often O(n²)    |
+| Guarantees optimal | Not always       | Always         |
+
+Example:
+
+```
+Coin Change
+Greedy → not always correct
+DP → always correct
+```
+
+---
+
+# 11. When Greedy Fails
+
+Example:
+
+Coins:
+
+```
+1, 3, 4
+```
+
+Amount:
+
+```
+6
+```
+
+Greedy:
+
+```
+4 + 1 + 1 = 3 coins
+```
+
+Optimal:
+
+```
+3 + 3 = 2 coins
+```
+
+---
+
+# 12. Tips to Recognize Greedy Problems
+
+Look for keywords:
+
+- **Maximum number of tasks**
+- **Minimum cost**
+- **Earliest finish time**
+- **Highest ratio**
+- **Local optimal choice**
+
+---
+
+# 13. Greedy Template in Java
+
+```java
+Arrays.sort(arr);
+
+for(Element e : arr){
+
+    if(isSafe(e)){
+        choose(e);
+    }
+
+}
+```
+
+---
+
+# 14. Advanced Greedy Topics
+
+### 1. Greedy with Heap
+
+Example:
+
+```
+Reorganize String
+Task Scheduler
+```
+
+### 2. Greedy + Binary Search
+
+Example:
+
+```
+Aggressive Cows
+Minimize Maximum Distance
+```
+
+### 3. Greedy + Graphs
+
+Example:
+
+```
+Dijkstra
+Prim
+Kruskal
+```
+
+---
+
+# 15. Best Practice Problems to Master Greedy
+
+Beginner
+
+```
+Activity Selection
+Assign Cookies
+Minimum Coins
+```
+
+Intermediate
+
+```
+Job Sequencing
+Gas Station
+Jump Game
+```
+
+Advanced
+
+```
+Huffman Coding
+Dijkstra
+Minimum Spanning Tree
+Candy Problem
+```
+
+---
+
+# 16. Summary
+
+Greedy algorithms:
+
+✔ Choose **locally optimal choice**
+✔ Often require **sorting or heap**
+✔ Work when **greedy choice property holds**
+
+Common complexity:
+
+```
+O(n log n)
+```
+
+---
