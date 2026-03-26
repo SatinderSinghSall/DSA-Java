@@ -619,6 +619,724 @@ If you'd like, I can also help you **turn this into a complete GitHub repository
 
 ---
 
+Here is a **professional, academic-quality `README.md`** based on all your uploaded files and topics. I carefully reviewed each file line-by-line and incorporated every concept.
+
+---
+
+# 📘 Greedy Algorithms in Java
+
+## 📌 Overview
+
+This repository contains implementations of **Greedy Algorithms** in Java, covering a wide range of classical optimization problems. Each problem demonstrates how locally optimal choices lead to globally optimal solutions under specific conditions.
+
+The repository is designed for:
+
+- 📚 Academic learning (Data Structures & Algorithms)
+- 💼 Interview preparation
+- 🧠 Conceptual clarity in Greedy techniques
+
+---
+
+## 🧠 Topics Covered
+
+- Activity Selection Problem
+- Fractional Knapsack Problem
+- Job Sequencing with Deadlines
+- Minimum Number of Coins (Indian Currency System)
+- Chocolate Cutting Problem (Minimum Cost)
+- Maximum Length Chain of Pairs
+- Minimum Absolute Difference Pairs
+- Sorting & Greedy Strategy Integration
+
+---
+
+## 📂 Project Structure
+
+```
+├── ActivitySelection.java
+├── ActivitySelection2.java
+├── FractionalKnapsack.java
+├── JobSequencing.java
+├── IndianCoins.java
+├── ChocolateProblem.java
+├── MaxLenChainPairs.java
+├── MinAbsDiffPairs.java
+├── Main.java
+```
+
+---
+
+## 🚀 Implemented Problems
+
+### 1️⃣ Activity Selection Problem
+
+📄 File:
+
+- Select maximum number of non-overlapping activities.
+- Assumes activities are sorted by end time.
+- Time Complexity: **O(n)**
+
+🔹 Approach:
+
+- Always pick the activity with the earliest finishing time.
+- Continue selecting compatible activities.
+
+---
+
+### 2️⃣ Activity Selection (Unsorted Input)
+
+📄 File:
+
+- Handles unsorted input using sorting.
+- Uses **2D array + Comparator (Lambda)**.
+
+🔹 Key Concepts:
+
+- Sorting by end time
+- Greedy selection after sorting
+
+---
+
+### 3️⃣ Fractional Knapsack Problem
+
+📄 File:
+
+- Maximizes value with fractional item inclusion.
+
+🔹 Approach:
+
+- Compute **value/weight ratio**
+- Sort in descending order
+- Take full or fractional items accordingly
+
+⏱ Time Complexity: **O(n log n)**
+
+---
+
+### 4️⃣ Job Sequencing Problem
+
+📄 File:
+
+- Schedule jobs to maximize profit within deadlines.
+
+🔹 Approach:
+
+- Sort jobs by profit (descending)
+- Assign jobs to latest available slot before deadline
+
+---
+
+### 5️⃣ Minimum Number of Coins (Indian Coins)
+
+📄 File:
+
+- Finds minimum coins for a given value.
+
+🔹 Approach:
+
+- Use largest denomination first
+- Greedy works due to canonical coin system
+
+---
+
+### 6️⃣ Chocolate Cutting Problem
+
+📄 File:
+
+- Minimize cost of breaking chocolate into 1×1 pieces.
+
+🔹 Approach:
+
+- Sort cut costs in descending order
+- Multiply cost by current segments
+
+---
+
+### 7️⃣ Maximum Length Chain of Pairs
+
+📄 File:
+
+- Find longest chain where next pair starts after previous ends.
+
+🔹 Approach:
+
+- Sort pairs by end value
+- Apply activity selection logic
+
+---
+
+### 8️⃣ Minimum Absolute Difference Pairs
+
+📄 File:
+
+- Minimize sum of absolute differences between pairs.
+
+🔹 Approach:
+
+- Sort both arrays
+- Pair corresponding elements
+
+---
+
+### 9️⃣ Main File (Execution Template)
+
+📄 File:
+
+- Basic Java execution structure
+- Demonstrates loops and output formatting
+
+---
+
+## ⚙️ Key Concepts & Techniques
+
+### ✅ Greedy Strategy
+
+- Make the **locally optimal choice** at each step
+- Works only when **optimal substructure + greedy choice property** holds
+
+### ✅ Sorting as a Foundation
+
+Many greedy problems rely on sorting:
+
+- By end time
+- By profit
+- By ratio
+- By cost
+
+### ✅ Data Structures Used
+
+- Arrays
+- ArrayList
+- 2D Arrays
+- Custom Classes (Job objects)
+
+### ✅ Java Features Used
+
+- Lambda Expressions
+- Comparator Interface
+- Collections Framework
+- Arrays Utility Methods
+
+---
+
+## 📊 Complexity Summary
+
+| Problem             | Time Complexity   |
+| ------------------- | ----------------- |
+| Activity Selection  | O(n) / O(n log n) |
+| Fractional Knapsack | O(n log n)        |
+| Job Sequencing      | O(n²)             |
+| Indian Coins        | O(n)              |
+| Chocolate Problem   | O(n log n)        |
+| Chain of Pairs      | O(n log n)        |
+| Min Abs Difference  | O(n log n)        |
+
+---
+
+## 🧪 How to Run
+
+1. Compile any file:
+
+```bash
+javac FileName.java
+```
+
+2. Run:
+
+```bash
+java FileName
+```
+
+Example:
+
+```bash
+javac FractionalKnapsack.java
+java FractionalKnapsack
+```
+
+---
+
+## 🎯 Learning Outcomes
+
+By completing this module, you have:
+
+- Understood when Greedy algorithms work
+- Learned multiple classic greedy problems
+- Implemented efficient Java solutions
+- Gained insight into optimization strategies
+
+---
+
+## 📌 Conclusion
+
+This repository demonstrates how **Greedy Algorithms** can efficiently solve optimization problems by making smart local decisions. It also highlights the importance of **sorting and problem structure** in determining whether a greedy approach is valid.
+
+---
+
+## 👨‍💻 Author
+
+Satinder Singh Sall
+Full-Stack Web/Mobile Engineer
+
+---
+
+---
+
+# 🚀 Greedy Algorithms in Java
+
+![Java](https://img.shields.io/badge/Language-Java-blue)
+![DSA](https://img.shields.io/badge/Topic-Data%20Structures%20%26%20Algorithms-green)
+![Greedy](https://img.shields.io/badge/Technique-Greedy-orange)
+![Level](https://img.shields.io/badge/Level-Academic%20%2B%20Interview-important)
+
+---
+
+## 📌 Overview
+
+This repository contains a comprehensive implementation of **Greedy Algorithms** in Java. Each problem demonstrates how **locally optimal decisions** can lead to **globally optimal solutions**.
+
+This project is designed for:
+
+- 🎓 Academic coursework
+- 💼 Coding interviews
+- 🧠 Concept mastery
+
+---
+
+## 🧠 What is a Greedy Algorithm?
+
+A **Greedy Algorithm** makes the best possible choice at each step **without reconsidering previous decisions**.
+
+### ✅ Conditions for Greedy:
+
+- **Optimal Substructure**
+- **Greedy Choice Property**
+
+---
+
+## 📂 Problems Covered
+
+1. Activity Selection
+2. Fractional Knapsack
+3. Job Sequencing
+4. Indian Coins (Minimum Coins)
+5. Chocolate Cutting Problem
+6. Maximum Length Chain of Pairs
+7. Minimum Absolute Difference Pairs
+
+---
+
+# 🧩 1. Activity Selection Problem
+
+## 📖 Problem
+
+Select the **maximum number of non-overlapping activities**.
+
+---
+
+## 🧠 Theory
+
+- Choose activity with **earliest finish time**
+- Ensures maximum remaining time for others
+
+---
+
+## 🔄 Flowchart
+
+```
+Start
+  ↓
+Sort activities by end time
+  ↓
+Select first activity
+  ↓
+For each activity:
+    If start ≥ lastEnd:
+        Select it
+  ↓
+End
+```
+
+---
+
+## 🧾 Pseudocode
+
+```
+sort activities by end time
+select first activity
+lastEnd = end[0]
+
+for i = 1 to n:
+    if start[i] >= lastEnd:
+        select activity
+        lastEnd = end[i]
+```
+
+---
+
+## 💻 Code Explanation
+
+From your file:
+
+- Uses arrays `start[]` and `end[]`
+- Tracks last selected activity using `lastEnd`
+- Stores results in `ArrayList`
+
+---
+
+# 🧩 2. Fractional Knapsack
+
+## 📖 Problem
+
+Maximize value with limited capacity (fractions allowed).
+
+---
+
+## 🧠 Theory
+
+- Use **value/weight ratio**
+- Pick highest ratio first
+
+---
+
+## 🔄 Flowchart
+
+```
+Start
+  ↓
+Compute ratio = value/weight
+  ↓
+Sort by ratio (descending)
+  ↓
+Take full items or fraction
+  ↓
+End
+```
+
+---
+
+## 🧾 Pseudocode
+
+```
+calculate ratio for each item
+sort items by ratio descending
+
+for each item:
+    if capacity allows:
+        take full
+    else:
+        take fraction
+        break
+```
+
+---
+
+## 💻 Code Insight
+
+- Uses `Double.compare()` for sorting
+- Maintains `capacity`
+- Adds fractional value when needed
+
+---
+
+# 🧩 3. Job Sequencing Problem
+
+## 📖 Problem
+
+Schedule jobs to **maximize profit** before deadlines.
+
+---
+
+## 🧠 Theory
+
+- Pick highest profit jobs first
+- Assign to latest possible slot
+
+---
+
+## 🔄 Flowchart
+
+```
+Start
+  ↓
+Sort jobs by profit
+  ↓
+Find max deadline
+  ↓
+For each job:
+    place in latest free slot
+  ↓
+End
+```
+
+---
+
+## 🧾 Pseudocode
+
+```
+sort jobs by profit descending
+for each job:
+    for slot = deadline to 1:
+        if slot empty:
+            assign job
+            break
+```
+
+---
+
+## 💻 Code Insight
+
+- Uses custom `Job` class
+- Slot array initialized with `-1`
+- Greedy scheduling logic
+
+---
+
+# 🧩 4. Indian Coins Problem
+
+## 📖 Problem
+
+Find minimum number of coins to make value.
+
+---
+
+## 🧠 Theory
+
+- Always pick **largest denomination first**
+- Works due to canonical system
+
+---
+
+## 🔄 Flowchart
+
+```
+Start
+  ↓
+Take largest coin
+  ↓
+Subtract from value
+  ↓
+Repeat until zero
+```
+
+---
+
+## 🧾 Pseudocode
+
+```
+coins = [2000, 500, ... ,1]
+
+for coin in coins:
+    while value >= coin:
+        value -= coin
+        count++
+```
+
+---
+
+## 💻 Code Insight
+
+- Uses loop + while condition
+- Greedy guarantees optimal result
+
+---
+
+# 🧩 5. Chocolate Cutting Problem
+
+## 📖 Problem
+
+Minimize cost of breaking chocolate into 1×1 pieces.
+
+---
+
+## 🧠 Theory
+
+- Always perform **costliest cut first**
+- Multiply by current segments
+
+---
+
+## 🔄 Flowchart
+
+```
+Start
+  ↓
+Sort costs descending
+  ↓
+Pick higher cost cut
+  ↓
+Update pieces
+  ↓
+Repeat
+```
+
+---
+
+## 🧾 Pseudocode
+
+```
+sort x and y descending
+
+while both remain:
+    if x[i] > y[j]:
+        cost += x[i] * horizontalPieces
+    else:
+        cost += y[j] * verticalPieces
+```
+
+---
+
+## 💻 Code Insight
+
+- Uses `Collections.reverseOrder()`
+- Tracks horizontal & vertical segments
+
+---
+
+# 🧩 6. Maximum Length Chain of Pairs
+
+## 📖 Problem
+
+Find longest chain where:
+
+```
+(a, b) → (c, d) if b < c
+```
+
+---
+
+## 🧠 Theory
+
+- Same as activity selection
+- Sort by second element
+
+---
+
+## 🧾 Pseudocode
+
+```
+sort pairs by end
+
+count = 1
+lastEnd = first pair end
+
+for each pair:
+    if start > lastEnd:
+        count++
+```
+
+---
+
+## 💻 Code Insight
+
+- Uses 2D array
+- Greedy selection logic
+
+---
+
+# 🧩 7. Minimum Absolute Difference Pairs
+
+## 📖 Problem
+
+Minimize:
+
+```
+Σ |A[i] - B[i]|
+```
+
+---
+
+## 🧠 Theory
+
+- Sort both arrays
+- Match corresponding elements
+
+---
+
+## 🧾 Pseudocode
+
+```
+sort A
+sort B
+
+for i:
+    sum += abs(A[i] - B[i])
+```
+
+---
+
+## 💻 Code Insight
+
+- Uses `Arrays.sort()`
+- Simple greedy pairing
+
+---
+
+# 📊 Complexity Summary
+
+| Problem            | Complexity |
+| ------------------ | ---------- |
+| Activity Selection | O(n log n) |
+| Knapsack           | O(n log n) |
+| Job Sequencing     | O(n²)      |
+| Coins              | O(n)       |
+| Chocolate          | O(n log n) |
+
+---
+
+# 🧪 How to Run
+
+```bash
+javac FileName.java
+java FileName
+```
+
+---
+
+# 🎓 Viva / Interview Questions
+
+## 🔹 Conceptual
+
+1. What is a Greedy Algorithm?
+2. When does Greedy fail?
+3. Difference between Greedy and Dynamic Programming?
+4. What is greedy choice property?
+
+---
+
+## 🔹 Problem-Based
+
+1. Why does activity selection work greedily?
+2. Why is fractional knapsack greedy but 0/1 is not?
+3. Why does Indian coin system guarantee optimal solution?
+4. Can job sequencing be optimized further?
+
+---
+
+## 🔹 Coding
+
+1. Modify knapsack to print selected items
+2. Convert activity selection to return indices
+3. Optimize job sequencing using priority queue
+
+---
+
+# 🎯 Learning Outcomes
+
+- Strong understanding of greedy paradigm
+- Ability to identify greedy problems
+- Implementation of classic optimization problems
+- Improved problem-solving skills
+
+---
+
+# 👨‍💻 Author
+
+Satinder Singh Sall
+Full-Stack Web/Mobile Engineer
+
+---
+
 # 📖 Overview
 
 This repository/module provides a **complete academic and practical understanding of Greedy Algorithms**, covering:
