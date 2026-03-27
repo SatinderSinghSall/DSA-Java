@@ -30,6 +30,16 @@ public class InOrderTraversal {
 
             return newNode;
         }
+
+        public static void inOrder(Node root) {
+            if (root == null) { // base-case
+                return;
+            }
+
+            inOrder(root.left); // recursive work
+            System.out.print(root.data + " ");
+            inOrder(root.right);
+        }
     }
 
     public static void main(String[] args) {
@@ -40,6 +50,6 @@ public class InOrderTraversal {
         BinaryTree tree = new BinaryTree();
         Node root = tree.buildTree(nodes);
 
-        System.out.println("Root Node Data is: " + root.data);
+        tree.inOrder(root);
     }
 }
