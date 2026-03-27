@@ -1,4 +1,4 @@
-// Binary Trees: Level-Order Tree Traversals.
+// Binary Trees: Level-Order Tree Traversal.
 
 public class LevelOrderTraversal {
     static class Node {
