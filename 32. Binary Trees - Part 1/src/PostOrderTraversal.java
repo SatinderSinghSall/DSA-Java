@@ -30,6 +30,16 @@ public class PostOrderTraversal {
 
             return newNode;
         }
+
+        public static void postOrder(Node root) {
+            if (root == null) { // base-case
+                return;
+            }
+
+            postOrder(root.left); // recursive work
+            postOrder(root.right);
+            System.out.print(root.data + " ");
+        }
     }
 
     public static void main(String[] args) {
@@ -40,6 +50,6 @@ public class PostOrderTraversal {
         BinaryTree tree = new BinaryTree();
         Node root = tree.buildTree(nodes);
 
-        System.out.println("Root Node Data is: " + root.data);
+        tree.postOrder(root);
     }
 }
