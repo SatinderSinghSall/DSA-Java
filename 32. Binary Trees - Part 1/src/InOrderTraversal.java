@@ -1,4 +1,4 @@
-// Binary Trees: In-Order Tree Traversal.
+// Binary Trees: In-Order (In Between) Tree Traversal.
 
 public class InOrderTraversal {
     static class Node {
