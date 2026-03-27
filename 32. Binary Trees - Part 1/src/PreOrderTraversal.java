@@ -41,6 +41,5 @@ public class PreOrderTraversal {
         Node root = tree.buildTree(nodes);
 
         System.out.println("Root Node Data is: " + root.data);
-
     }
 }
