@@ -32,6 +32,17 @@ public class PreOrderTraversal {
         }
     }
 
+    // Method to implement Pre-Order Traversal:
+    public static void preOrder(Node root) {
+        if (root == null) {
+            return;
+        }
+
+        System.out.print(root.data + " ");
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+
     public static void main(String[] args) {
         System.out.println("Binary Trees: Pre-Order Tree Traversal.");
 
@@ -40,6 +51,6 @@ public class PreOrderTraversal {
         BinaryTree tree = new BinaryTree();
         Node root = tree.buildTree(nodes);
 
-        System.out.println("Root Node Data is: " + root.data);
+        preOrder(root);
     }
 }
