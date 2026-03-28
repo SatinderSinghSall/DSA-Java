@@ -33,7 +33,7 @@ public class CountNodesTree {
     }
 
     public static void main(String[] args) {
-        System.out.println("Binary Trees: Height of a Tree.");
+        System.out.println("Binary Trees: Count of Nodes of a Tree.");
 
         int nodes[] = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
 
