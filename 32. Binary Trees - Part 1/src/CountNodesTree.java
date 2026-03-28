@@ -1,6 +1,6 @@
-// Binary Trees: Height of a Tree.
+// Binary Trees: Count of Nodes of a Tree.
 
-public class HeightOfaTree {
+public class CountNodesTree {
     static class Node {
         int data;
         LevelOrderTraversal.Node left;
