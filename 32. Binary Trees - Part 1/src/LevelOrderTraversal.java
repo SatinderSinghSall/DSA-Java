@@ -1,5 +1,8 @@
 // Binary Trees: Level-Order Tree Traversal.
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class LevelOrderTraversal {
     static class Node {
         int data;
@@ -30,6 +33,42 @@ public class LevelOrderTraversal {
 
             return newNode;
         }
+
+        // Method to find Level Order Traversal:
+        public static void levelOrder(Node root) {
+            if (root == null) { // base case
+                return;
+            }
+
+            Queue<Node> q = new LinkedList<>();
+
+            q.add(root);
+            q.add(null);
+
+            while (!q.isEmpty()) {
+                Node currNode = q.remove();
+
+                if (currNode == null) {
+                    System.out.println();
+
+                    if (q.isEmpty()) {
+                        break;
+                    } else {
+                        q.add(null);
+                    }
+                } else {
+                    System.out.print(currNode.data + " ");
+
+                    if (currNode.left != null) {
+                        q.add(currNode.left);
+                    }
+
+                    if (currNode.right != null) {
+                        q.add(currNode.right);
+                    }
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -40,6 +79,6 @@ public class LevelOrderTraversal {
         BinaryTree tree = new BinaryTree();
         Node root = tree.buildTree(nodes);
 
-        System.out.println(root.data);
+        tree.levelOrder(root);
     }
 }
