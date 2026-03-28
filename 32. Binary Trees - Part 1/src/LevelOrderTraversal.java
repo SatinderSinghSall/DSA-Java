@@ -34,7 +34,7 @@ public class LevelOrderTraversal {
             return newNode;
         }
 
-        // Method to find Level Order Traversal:
+        // Method to find Level Order Traversal: Binary Tree
         public static void levelOrder(Node root) {
             if (root == null) { // base case
                 return;
