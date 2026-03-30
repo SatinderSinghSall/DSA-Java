@@ -37,7 +37,7 @@ public class SearchBinarySearchTree {
         inorder(root.right);
     }
 
-    // Method to Search in a Binary Search Tree:
+    // Method to Search in a Binary Search Tree: Time Complexity - O(H) where H = Height of a tree.
     public static boolean search(Node root, int key) {
         // Case: If key not found.
         if (root == null) {
