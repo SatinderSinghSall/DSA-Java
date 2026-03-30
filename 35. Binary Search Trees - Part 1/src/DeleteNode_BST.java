@@ -37,6 +37,29 @@ public class DeleteNode_BST {
         inorder(root.right);
     }
 
+    // Method to Search in a Binary Search Tree: Time Complexity - O(H) where H = Height of a tree.
+    public static boolean search(Node root, int key) {
+        // Case: If key not found.
+        if (root == null) {
+            return false;
+        }
+
+        // Case: If root node == key:
+        if (root.data == key) {
+            return true;
+        }
+
+        // Case: Search in a left subtree:
+        if (root.data > key) {
+            return search(root.left, key);
+        }
+
+        // Case: Search in a right subtree:
+        else {
+            return search(root.right, key);
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Binary Search Tree: Delete a Node in a Binary Search Tree.");
         System.out.println();
@@ -50,5 +73,12 @@ public class DeleteNode_BST {
 
         inorder(root);
         System.out.println();
+
+        int key = 1;
+        if (search(root, key)) {
+            System.out.println("Key Found!");
+        } else {
+            System.out.println("Key Not Found.");
+        }
     }
 }
