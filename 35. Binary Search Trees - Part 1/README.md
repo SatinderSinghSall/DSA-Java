@@ -4,6 +4,984 @@
 
 ---
 
+# 🌳 Binary Search Tree (BST) — Data Structures & Algorithms in Java
+
+![Java](https://img.shields.io/badge/Language-Java-orange)
+![DSA](https://img.shields.io/badge/Data%20Structures-Binary%20Search%20Tree-blue)
+![Algorithms](https://img.shields.io/badge/Algorithms-Recursive-green)
+![Status](https://img.shields.io/badge/Project-Complete-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
+---
+
+# 📚 Overview
+
+This repository contains a **comprehensive implementation of Binary Search Tree (BST) algorithms in Java**.
+
+The project demonstrates fundamental **data structure concepts and recursive algorithms** commonly used in:
+
+- Computer Science coursework
+- Technical interviews
+- Competitive programming
+- Software engineering problem solving
+
+The repository includes implementations of:
+
+| Algorithm          | Description                                    |
+| ------------------ | ---------------------------------------------- |
+| BST Construction   | Building a BST using insertion                 |
+| Search in BST      | Finding an element efficiently                 |
+| Delete Node        | Removing a node while maintaining BST property |
+| Print in Range     | Printing nodes within a value range            |
+| Root to Leaf Paths | Displaying all root-to-leaf paths              |
+| Validate BST       | Checking if a tree is a valid BST              |
+| Mirror BST         | Creating a mirror image of the tree            |
+
+---
+
+# 🌳 What is a Binary Search Tree?
+
+A **Binary Search Tree (BST)** is a hierarchical data structure where:
+
+```
+Left Subtree  <  Node Value  <  Right Subtree
+```
+
+### Example BST
+
+```
+        8
+      /   \
+     5     10
+    / \      \
+   3   6      11
+  / \           \
+ 1   4           14
+```
+
+### Key Properties
+
+- Left child values are **smaller**
+- Right child values are **greater**
+- Enables **efficient searching**
+
+---
+
+# ⏱ Time Complexity
+
+| Operation | Average Case | Worst Case |
+| --------- | ------------ | ---------- |
+| Search    | O(log n)     | O(n)       |
+| Insert    | O(log n)     | O(n)       |
+| Delete    | O(log n)     | O(n)       |
+| Traversal | O(n)         | O(n)       |
+
+Worst case occurs when the tree becomes **skewed**.
+
+---
+
+# 📁 Project Structure
+
+```
+BST-Algorithms/
+│
+├── BinarySearchTree.java
+├── SearchBinarySearchTree.java
+├── DeleteNode_BST.java
+├── PrintRange_BST.java
+├── RootToLeafPath_BST.java
+├── ValidateBST.java
+├── MirrorBST.java
+└── Main.java
+```
+
+---
+
+# 1️⃣ Constructing a Binary Search Tree
+
+## Problem
+
+Build a BST by inserting elements sequentially.
+
+### Example Input
+
+```
+[5, 1, 3, 2, 4, 7]
+```
+
+### Resulting BST
+
+```
+      5
+     / \
+    1   7
+     \
+      3
+     / \
+    2   4
+```
+
+---
+
+## Algorithm
+
+1. Start with an empty tree
+2. Insert the first value as root
+3. For every next value:
+   - If smaller → go left
+   - If greater → go right
+
+4. Repeat recursively
+
+---
+
+## Pseudocode
+
+```
+function insert(root, value):
+
+    if root == null
+        return new Node(value)
+
+    if value < root.data
+        root.left = insert(root.left, value)
+    else
+        root.right = insert(root.right, value)
+
+    return root
+```
+
+---
+
+## Java Code
+
+```java
+static class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int data){
+        this.data = data;
+    }
+}
+
+public static Node insert(Node root, int val){
+    if(root == null){
+        return new Node(val);
+    }
+
+    if(root.data > val){
+        root.left = insert(root.left, val);
+    } else {
+        root.right = insert(root.right, val);
+    }
+
+    return root;
+}
+```
+
+---
+
+# 2️⃣ Search in a Binary Search Tree
+
+## Problem
+
+Find whether a **key exists in the BST**.
+
+---
+
+### Example
+
+Search for `1`
+
+```
+        5
+       / \
+      1   7
+```
+
+Traversal:
+
+```
+5 → go left
+1 → found
+```
+
+---
+
+## Algorithm
+
+1. Compare key with root
+2. If equal → return true
+3. If smaller → search left
+4. If larger → search right
+
+---
+
+## Pseudocode
+
+```
+function search(root, key):
+
+    if root == null
+        return false
+
+    if root.data == key
+        return true
+
+    if key < root.data
+        return search(root.left)
+    else
+        return search(root.right)
+```
+
+---
+
+## Java Code
+
+```java
+public static boolean search(Node root, int key){
+
+    if(root == null)
+        return false;
+
+    if(root.data == key)
+        return true;
+
+    if(root.data > key)
+        return search(root.left, key);
+    else
+        return search(root.right, key);
+}
+```
+
+---
+
+# 3️⃣ Delete Node in BST
+
+## Problem
+
+Delete a node while preserving BST properties.
+
+---
+
+### Three Cases
+
+### Case 1 — Leaf Node
+
+```
+   5
+  /
+ 3
+```
+
+Delete `3`
+
+```
+   5
+```
+
+---
+
+### Case 2 — One Child
+
+```
+  5
+   \
+    7
+     \
+      8
+```
+
+Delete `7`
+
+```
+ 5
+  \
+   8
+```
+
+---
+
+### Case 3 — Two Children
+
+Replace node with **Inorder Successor**
+
+```
+      8
+     / \
+    5   10
+```
+
+Delete `8`
+
+Replace with `10`.
+
+---
+
+## Algorithm
+
+1. Find the node
+2. Handle three cases
+3. Replace using inorder successor if needed
+
+---
+
+# 4️⃣ Print Nodes in Range
+
+## Problem
+
+Print all nodes whose values lie in range:
+
+```
+[k1 , k2]
+```
+
+Example:
+
+```
+Range = 2 to 5
+```
+
+BST:
+
+```
+      5
+     / \
+    3   7
+   / \
+  2   4
+```
+
+Output
+
+```
+2 3 4 5
+```
+
+---
+
+## Algorithm
+
+Use BST property to skip unnecessary branches.
+
+---
+
+## Pseudocode
+
+```
+function printInRange(root,k1,k2)
+
+    if root is null
+        return
+
+    if root.data between k1 and k2
+        print left
+        print root
+        print right
+
+    else if root.data < k1
+        go right
+
+    else
+        go left
+```
+
+---
+
+# 5️⃣ Root to Leaf Paths
+
+## Problem
+
+Print all possible paths from root node to leaf nodes.
+
+---
+
+Example
+
+```
+        8
+      /   \
+     5     10
+    / \
+   3   6
+```
+
+Paths
+
+```
+8 → 5 → 3
+8 → 5 → 6
+8 → 10
+```
+
+---
+
+## Algorithm
+
+Use **Backtracking**
+
+1. Add node to path
+2. If leaf → print path
+3. Recurse left and right
+4. Remove node from path
+
+---
+
+# 6️⃣ Validate a BST
+
+## Problem
+
+Check whether a binary tree satisfies BST properties.
+
+---
+
+### Valid BST
+
+```
+    8
+   / \
+  5   10
+```
+
+### Invalid BST
+
+```
+    8
+   / \
+ 10   5
+```
+
+---
+
+## Algorithm
+
+Use **min / max boundaries**.
+
+---
+
+## Pseudocode
+
+```
+function isValidBST(root, min, max):
+
+    if root == null
+        return true
+
+    if root.data <= min OR root.data >= max
+        return false
+
+    return check left AND right
+```
+
+---
+
+# 7️⃣ Mirror a Binary Search Tree
+
+## Problem
+
+Convert BST into its **mirror image**.
+
+---
+
+Original
+
+```
+    4
+   / \
+  2   7
+```
+
+Mirror
+
+```
+    4
+   / \
+  7   2
+```
+
+---
+
+## Algorithm
+
+Swap left and right recursively.
+
+---
+
+## Pseudocode
+
+```
+function mirror(root)
+
+    if root == null
+        return null
+
+    left = mirror(root.left)
+    right = mirror(root.right)
+
+    root.left = right
+    root.right = left
+
+    return root
+```
+
+---
+
+# 🧠 Key Concepts Learned
+
+- Recursive tree traversal
+- Binary tree properties
+- Backtracking algorithms
+- Tree transformation
+- Efficient searching
+- Structural validation
+
+---
+
+# 💼 Applications of BST
+
+Binary Search Trees are used in:
+
+- Database indexing
+- File systems
+- Compilers
+- Memory management
+- Priority queues
+- Searching algorithms
+
+---
+
+# 🚀 Skills Demonstrated
+
+✔ Data Structures
+✔ Recursive Algorithms
+✔ Tree Traversals
+✔ Problem Solving
+✔ Algorithm Analysis
+
+---
+
+# 📜 License
+
+This project is open-source under the **MIT License**.
+
+---
+
+# 👨‍💻 Author
+
+**Satinder Singh**
+
+Data Structures & Algorithms
+Java | Problem Solving | Software Engineering
+
+---
+
+---
+
+## 🌳 Binary Search Trees (Part 1 / BST) – DSA
+
+---
+
+# Binary Search Tree (BST) – Data Structures and Algorithms
+
+## Overview
+
+This repository contains Java implementations of fundamental **Binary Search Tree (BST)** operations.
+The project demonstrates the theoretical concepts and practical implementations of BST algorithms including:
+
+- BST Construction
+- Searching in a BST
+- Deleting a Node
+- Printing Nodes in a Range
+- Root-to-Leaf Path Traversal
+- Validating a BST
+- Mirroring a BST
+
+These implementations follow **standard recursive algorithms** and illustrate important data structure concepts used in computer science, competitive programming, and technical interviews.
+
+---
+
+# What is a Binary Search Tree?
+
+A **Binary Search Tree (BST)** is a binary tree data structure that maintains a specific ordering property.
+
+### BST Property
+
+For every node:
+
+```
+Left Subtree values  <  Node value  <  Right Subtree values
+```
+
+This property allows efficient searching, insertion, and deletion operations.
+
+### Time Complexity
+
+| Operation | Average Case | Worst Case |
+| --------- | ------------ | ---------- |
+| Search    | O(log n)     | O(n)       |
+| Insert    | O(log n)     | O(n)       |
+| Delete    | O(log n)     | O(n)       |
+
+The worst case occurs when the BST becomes **skewed**.
+
+---
+
+# Project Structure
+
+```
+BinarySearchTree.java
+SearchBinarySearchTree.java
+DeleteNode_BST.java
+PrintRange_BST.java
+RootToLeafPath_BST.java
+ValidateBST.java
+MirrorBST.java
+Main.java
+```
+
+---
+
+# 1. Building a Binary Search Tree
+
+## Problem
+
+Construct a Binary Search Tree by inserting elements sequentially.
+
+## Algorithm
+
+1. Start with an empty root.
+2. Insert elements one by one.
+3. If the value is smaller than the current node, move left.
+4. If the value is greater, move right.
+5. Repeat recursively until an empty position is found.
+
+## Pseudocode
+
+```
+function insert(root, value):
+    if root is null
+        return new Node(value)
+
+    if value < root.data
+        root.left = insert(root.left, value)
+    else
+        root.right = insert(root.right, value)
+
+    return root
+```
+
+## Java Implementation
+
+```java
+static class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int data) {
+        this.data = data;
+    }
+}
+
+public static Node insert(Node root, int val) {
+    if (root == null) {
+        return new Node(val);
+    }
+
+    if (root.data > val) {
+        root.left = insert(root.left, val);
+    } else {
+        root.right = insert(root.right, val);
+    }
+
+    return root;
+}
+```
+
+---
+
+# 2. Searching in a BST
+
+## Problem
+
+Determine whether a given key exists in the BST.
+
+## Algorithm
+
+1. Compare key with root.
+2. If equal → return true.
+3. If smaller → search left subtree.
+4. If greater → search right subtree.
+
+## Pseudocode
+
+```
+function search(root, key):
+    if root is null
+        return false
+
+    if root.data == key
+        return true
+
+    if key < root.data
+        search(root.left)
+    else
+        search(root.right)
+```
+
+## Java Implementation
+
+```java
+public static boolean search(Node root, int key) {
+    if (root == null) {
+        return false;
+    }
+
+    if (root.data == key) {
+        return true;
+    }
+
+    if (root.data > key) {
+        return search(root.left, key);
+    } else {
+        return search(root.right, key);
+    }
+}
+```
+
+---
+
+# 3. Delete a Node in BST
+
+## Problem
+
+Remove a node from the BST while maintaining BST properties.
+
+## Cases
+
+1. **Leaf Node** → delete directly
+2. **One Child** → replace node with child
+3. **Two Children** → replace with inorder successor
+
+## Algorithm
+
+1. Locate node to delete.
+2. Handle deletion based on the three cases.
+3. Maintain BST property.
+
+## Pseudocode
+
+```
+function delete(root, value):
+
+    if root is null
+        return null
+
+    if value < root.data
+        root.left = delete(root.left)
+
+    else if value > root.data
+        root.right = delete(root.right)
+
+    else
+        if node is leaf
+            return null
+
+        if only one child
+            return child
+
+        successor = smallest in right subtree
+        root.data = successor.data
+        delete successor
+
+    return root
+```
+
+## Java Implementation
+
+```java
+public static Node delete(Node root, int value) {
+
+    if (root == null) {
+        return null;
+    }
+
+    if (value < root.data) {
+        root.left = delete(root.left, value);
+    }
+
+    else if (value > root.data) {
+        root.right = delete(root.right, value);
+    }
+
+    else {
+
+        if (root.left == null && root.right == null) {
+            return null;
+        }
+
+        if (root.left == null) {
+            return root.right;
+        }
+
+        if (root.right == null) {
+            return root.left;
+        }
+
+        Node successor = findInorderSuccessor(root.right);
+        root.data = successor.data;
+        root.right = delete(root.right, successor.data);
+    }
+
+    return root;
+}
+```
+
+---
+
+# 4. Print Nodes in a Range
+
+## Problem
+
+Print all nodes whose values lie within a given range `[k1, k2]`.
+
+## Algorithm
+
+Use BST property to skip unnecessary branches.
+
+## Pseudocode
+
+```
+function printInRange(root, k1, k2):
+
+    if root is null
+        return
+
+    if root.data between k1 and k2
+        print left subtree
+        print root.data
+        print right subtree
+
+    else if root.data < k1
+        explore right subtree
+
+    else
+        explore left subtree
+```
+
+---
+
+# 5. Root to Leaf Paths
+
+## Problem
+
+Print all paths from root node to leaf nodes.
+
+## Algorithm
+
+1. Maintain a list for the current path.
+2. Add nodes while traversing.
+3. Print when leaf is reached.
+4. Backtrack after visiting nodes.
+
+---
+
+# 6. Validate a BST
+
+## Problem
+
+Check if a binary tree satisfies BST properties.
+
+## Algorithm
+
+Use **min and max constraints**.
+
+## Pseudocode
+
+```
+function isValidBST(root, min, max):
+
+    if root is null
+        return true
+
+    if root.data <= min OR root.data >= max
+        return false
+
+    return validate left subtree AND validate right subtree
+```
+
+---
+
+# 7. Mirror a BST
+
+## Problem
+
+Convert BST into its mirror image.
+
+## Algorithm
+
+Swap left and right subtrees recursively.
+
+## Pseudocode
+
+```
+function mirror(root):
+
+    if root is null
+        return null
+
+    left = mirror(root.left)
+    right = mirror(root.right)
+
+    root.left = right
+    root.right = left
+
+    return root
+```
+
+---
+
+# Key Concepts Learned
+
+- Tree recursion
+- Binary Search Tree properties
+- Tree traversal techniques
+- Backtracking
+- Structural tree transformations
+- Algorithm design using recursion
+
+---
+
+# Applications of BST
+
+Binary Search Trees are used in:
+
+- Database indexing
+- File systems
+- Symbol tables
+- Searching algorithms
+- Priority queues
+- Memory management
+
+---
+
+# Conclusion
+
+This project demonstrates a comprehensive exploration of **Binary Search Tree operations** using Java.
+Through these implementations, key algorithmic principles such as recursion, tree traversal, and structural manipulation are applied to solve fundamental problems in data structures.
+
+These concepts are essential for **technical interviews, competitive programming, and advanced algorithm design**.
+
+---
+
+# Data Structure and Algorithms: DSA - Java
+
+## 🌳 Binary Search Trees (Part 1 / BST) – DSA
+
+---
+
 # 📘 Binary Search Tree (BST) – Data Structures & Algorithms (Java)
 
 ![Java](https://img.shields.io/badge/Language-Java-blue)

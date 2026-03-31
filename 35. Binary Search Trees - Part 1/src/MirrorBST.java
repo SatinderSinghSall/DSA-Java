@@ -1,6 +1,6 @@
-// Binary Search Tree: Print nodes in a Range of a BST.
+// Binary Search Tree: Mirror a BST
 
-public class PrintRange_BST {
+public class MirrorBST {
 
     static class Node {
         int data;
@@ -18,7 +18,7 @@ public class PrintRange_BST {
             return new Node(val);
         }
 
-        if (root.data > val) {
+        if (val < root.data) {
             root.left = insert(root.left, val);
         } else {
             root.right = insert(root.right, val);
@@ -27,8 +27,9 @@ public class PrintRange_BST {
         return root;
     }
 
-    // Inorder Traversal
+    // Inorder traversal
     public static void inorder(Node root) {
+
         if (root == null) {
             return;
         }
@@ -38,47 +39,38 @@ public class PrintRange_BST {
         inorder(root.right);
     }
 
-    // Print nodes in range k1 to k2
-    public static void printInRange(Node root, int k1, int k2) {
+    // Mirror function
+    public static Node mirror(Node root) {
 
         if (root == null) {
-            return;
+            return null;
         }
 
-        if (root.data >= k1 && root.data <= k2) {
-            printInRange(root.left, k1, k2);
-            System.out.print(root.data + " ");
-            printInRange(root.right, k1, k2);
-        }
+        Node leftMirror = mirror(root.left);
+        Node rightMirror = mirror(root.right);
 
-        else if (root.data < k1) {
-            printInRange(root.right, k1, k2);
-        }
+        root.left = rightMirror;
+        root.right = leftMirror;
 
-        else {
-            printInRange(root.left, k1, k2);
-        }
+        return root;
     }
 
     public static void main(String[] args) {
 
-        System.out.println("Binary Search Tree: Print in a Range of a BST\n");
-
-        int values[] = {5, 1, 3, 2, 4, 7};
+        int values[] = {8, 5, 3, 1, 4, 6, 10, 11, 14};
         Node root = null;
 
         for (int i = 0; i < values.length; i++) {
             root = insert(root, values[i]);
         }
 
-        System.out.print("BST (Inorder): ");
+        System.out.print("Original BST: ");
         inorder(root);
         System.out.println();
 
-        int k1 = 2;
-        int k2 = 5;
+        root = mirror(root);
 
-        System.out.print("Nodes in range " + k1 + " to " + k2 + ": ");
-        printInRange(root, k1, k2);
+        System.out.print("Mirror BST: ");
+        inorder(root);
     }
 }
