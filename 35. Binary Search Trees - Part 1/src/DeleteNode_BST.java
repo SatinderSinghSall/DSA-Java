@@ -1,6 +1,7 @@
 // Binary Search Tree: Delete a Node in a Binary Search Tree.
 
 public class DeleteNode_BST {
+
     static class Node {
         int data;
         Node left;
@@ -11,22 +12,22 @@ public class DeleteNode_BST {
         }
     }
 
-    // Method to insert in a Binary Search Tree:
+    // Method to insert in a Binary Search Tree
     public static Node insert(Node root, int val) {
         if (root == null) {
-            root = new Node(val);
-            return  root;
+            return new Node(val);
         }
 
-        if (root.data > val) { // insert -> left subtree
+        if (root.data > val) {
             root.left = insert(root.left, val);
-        } else { // insert -> right subtree
+        } else {
             root.right = insert(root.right, val);
         }
 
         return root;
     }
 
+    // Inorder Traversal
     public static void inorder(Node root) {
         if (root == null) {
             return;
@@ -37,48 +38,90 @@ public class DeleteNode_BST {
         inorder(root.right);
     }
 
-    // Method to Search in a Binary Search Tree: Time Complexity - O(H) where H = Height of a tree.
+    // Search in BST
     public static boolean search(Node root, int key) {
-        // Case: If key not found.
         if (root == null) {
             return false;
         }
 
-        // Case: If root node == key:
         if (root.data == key) {
             return true;
         }
 
-        // Case: Search in a left subtree:
         if (root.data > key) {
             return search(root.left, key);
-        }
-
-        // Case: Search in a right subtree:
-        else {
+        } else {
             return search(root.right, key);
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println("Binary Search Tree: Delete a Node in a Binary Search Tree.");
-        System.out.println();
+    // Find Inorder Successor (smallest in right subtree)
+    public static Node findInorderSuccessor(Node root) {
+        while (root.left != null) {
+            root = root.left;
+        }
+        return root;
+    }
 
-        int values[] = {5, 1, 3, 2, 4, 7};
+    // Delete a node
+    public static Node delete(Node root, int value) {
+
+        if (root == null) {
+            return null;
+        }
+
+        if (value < root.data) {
+            root.left = delete(root.left, value);
+        }
+
+        else if (value > root.data) {
+            root.right = delete(root.right, value);
+        }
+
+        else { // Node found
+
+            // Case 1: Leaf Node
+            if (root.left == null && root.right == null) {
+                return null;
+            }
+
+            // Case 2: One child
+            if (root.left == null) {
+                return root.right;
+            }
+
+            else if (root.right == null) {
+                return root.left;
+            }
+
+            // Case 3: Two children
+            Node IS = findInorderSuccessor(root.right);
+            root.data = IS.data;
+            root.right = delete(root.right, IS.data);
+        }
+
+        return root;
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println("Binary Search Tree: Delete a Node in a BST\n");
+
+        int values[] = {8, 5, 3, 1, 4, 6, 10, 11, 14};
         Node root = null;
 
-        for (int i = 0; i < values.length; i ++) {
+        for (int i = 0; i < values.length; i++) {
             root = insert(root, values[i]);
         }
 
+        System.out.print("Original BST (Inorder): ");
         inorder(root);
         System.out.println();
 
-        int key = 1;
-        if (search(root, key)) {
-            System.out.println("Key Found!");
-        } else {
-            System.out.println("Key Not Found.");
-        }
+        root = delete(root, 5);
+
+        System.out.print("BST after deleting 5: ");
+        inorder(root);
+        System.out.println();
     }
 }
