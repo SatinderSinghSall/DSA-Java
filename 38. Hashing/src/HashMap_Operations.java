@@ -1,6 +1,7 @@
 // Hashing: HashMap Operations.
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class HashMap_Operations {
     public static void main(String[] args) {
@@ -13,6 +14,11 @@ public class HashMap_Operations {
         hm.put("India", 100);
         hm.put("China", 150);
         hm.put("USA", 50);
+        hm.put("Japan", 80);
+        hm.put("Germany", 70);
+        hm.put("France", 65);
+        hm.put("UK", 60);
+        hm.put("Canada", 55);
 
         System.out.println(hm);
 
@@ -39,5 +45,17 @@ public class HashMap_Operations {
 
         // Method - 'clear()' to clear full HashMa:
 //        System.out.println(hm.clear()); // true
+
+        // Iteration on HashMap:
+        Set<String> key = hm.keySet();
+        System.out.println(key);
+
+        System.out.println();
+        for (String k : key) {
+            System.out.println("Key: " + k + " & " + "Value: " + hm.get(k));
+        }
+
+        System.out.println();
+        System.out.println(hm.entrySet());
     }
 }
