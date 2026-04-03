@@ -27,6 +27,7 @@ public class HashMap_Operations {
 
         // Removing an Element from a HashMap: O(1)
         hm.remove("USA");
+        System.out.println(hm.remove("UK")); // null
 
         System.out.println(hm);
     }
