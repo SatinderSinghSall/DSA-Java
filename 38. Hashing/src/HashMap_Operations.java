@@ -30,5 +30,14 @@ public class HashMap_Operations {
         System.out.println(hm.remove("UK")); // null
 
         System.out.println(hm);
+
+        // Method - 'size()' to get the HashMap size-length:
+        System.out.println(hm.size());
+
+        // Method - 'isEmpty()' to check if HashMap is empty or not:
+        System.out.println(hm.isEmpty()); // false
+
+        // Method - 'clear()' to clear full HashMa:
+//        System.out.println(hm.clear()); // true
     }
 }
