@@ -1,5 +1,7 @@
 // Hashing: Count Distinct Elements.
 
+// Hashing: Count Distinct Elements using HashSet.
+
 import java.util.HashSet;
 
 public class CountDistinctElements {
@@ -10,16 +12,16 @@ public class CountDistinctElements {
 
         HashSet<Integer> set = new HashSet<>();
 
-        System.out.println();
+        System.out.print("Array elements: ");
         for (int ele : arr) {
             System.out.print(ele + " ");
         }
 
-        System.out.println();
         for (int num : arr) {
-            set.add(num); // duplicates automatically ignored
+            set.add(num);
         }
 
+        System.out.println("\nDistinct elements: " + set);
         System.out.println("Number of distinct elements: " + set.size());
     }
 }
