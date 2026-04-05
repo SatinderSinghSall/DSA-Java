@@ -559,3 +559,503 @@ This module builds a strong foundation in:
 **Satinder Singh Sall**
 Full-Stack Web/Mobile Engineer
 DSA | Java | Problem Solving
+
+---
+
+# 📘 Hashing in Data Structures & Algorithms (Java)
+
+## 📌 Overview
+
+This repository contains a comprehensive implementation of **Hashing concepts in Data Structures & Algorithms (DSA)** using Java.
+It covers both **theoretical foundations** and **practical problem-solving approaches**, including real-world coding patterns frequently asked in technical interviews.
+
+The implementation includes:
+
+- Core hashing data structures
+- Custom HashMap implementation
+- Standard library usage (`HashMap`, `HashSet`, `LinkedHashMap`, `TreeMap`, etc.)
+- Problem-solving using hashing techniques
+
+---
+
+## 🧠 Topics Covered
+
+### 🔹 1. HashMap Fundamentals
+
+- Creation, insertion, deletion, search
+- Time complexity: **O(1)** average
+- Iteration using `keySet()` and `entrySet()`
+
+📂 Reference:
+
+---
+
+### 🔹 2. Custom HashMap Implementation
+
+- Built from scratch using:
+  - Array of buckets
+  - LinkedList (chaining)
+
+- Includes:
+  - `put()`, `get()`, `remove()`
+  - Custom hash function
+
+📂 Reference:
+
+---
+
+### 🔹 3. HashSet & Variants
+
+- Unique element storage
+- No duplicates allowed
+- Variants:
+  - `LinkedHashSet` → maintains insertion order
+  - `TreeSet` → sorted order
+
+📂 References:
+
+-
+- ***
+
+### 🔹 4. LinkedHashMap & TreeMap
+
+| Structure     | Ordering        | Complexity |
+| ------------- | --------------- | ---------- |
+| HashMap       | No order        | O(1)       |
+| LinkedHashMap | Insertion order | O(1)       |
+| TreeMap       | Sorted order    | O(log n)   |
+
+📂 References:
+
+-
+- ***
+
+## 💻 Problem Solving with Hashing
+
+### ✅ 1. Count Distinct Elements
+
+- Uses `HashSet` to remove duplicates
+- Efficient solution: **O(n)**
+
+📂 Code:
+
+---
+
+### ✅ 2. Union & Intersection of Arrays
+
+- Union → combine unique elements
+- Intersection → common elements
+
+📂 Code:
+
+---
+
+### ✅ 3. Find Itinerary from Tickets
+
+- Uses `HashMap` for mapping routes
+- Key concept: **starting point = not a destination**
+
+📂 Code:
+
+---
+
+### ✅ 4. Largest Subarray with Sum = 0
+
+- Uses **prefix sum + HashMap**
+- Stores: `sum → index`
+
+📂 Code:
+
+---
+
+### ✅ 5. Subarray Sum Equal to K
+
+- Uses **prefix sum + frequency map**
+- Key formula:
+
+  ```
+  sum - K = previous sum
+  ```
+
+📂 Code:
+
+---
+
+### ✅ 6. Majority Element (> n/3 times)
+
+- Uses frequency counting with `HashMap`
+
+📂 Code:
+
+---
+
+### ✅ 7. Valid Anagram
+
+- Uses character frequency comparison
+
+📂 Code:
+
+---
+
+## ⚙️ Core Concepts Learned
+
+### 🔸 Hashing Principles
+
+- Hash function → index mapping
+- Collision handling → chaining
+
+### 🔸 Time Complexity
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Insert    | O(1) avg   |
+| Search    | O(1) avg   |
+| Delete    | O(1) avg   |
+
+---
+
+### 🔸 Prefix Sum Technique
+
+Used in:
+
+- Largest subarray with sum 0
+- Subarray sum = K
+
+---
+
+### 🔸 Key Patterns
+
+- **Set for uniqueness**
+- **Map for frequency**
+- **Prefix sum for subarrays**
+
+---
+
+## 🚀 How to Run
+
+```bash
+javac FileName.java
+java FileName
+```
+
+Example:
+
+```bash
+javac CountDistinctElements.java
+java CountDistinctElements
+```
+
+---
+
+## 🧩 Project Structure
+
+```
+Hashing/
+│
+├── HashMap_Implementation.java
+├── HashMap_Operations.java
+├── LinkedHashMap_Operations.java
+├── TreeMap_Operations.java
+├── HashSet_Operations.java
+├── LinkedHashSet_Example.java
+├── TreeSet_Example.java
+│
+├── CountDistinctElements.java
+├── UnionIntersection.java
+├── FindItinerary.java
+├── LargestSubarrayZeroSum.java
+├── SubarraySumK.java
+├── MajorityElement.java
+├── ValidAnagram.java
+│
+└── Main.java
+```
+
+---
+
+## 🎯 Learning Outcomes
+
+After completing this module, you can:
+
+- ✅ Understand and implement hashing concepts
+- ✅ Use Java Collections effectively
+- ✅ Solve interview-level problems using hashing
+- ✅ Apply prefix sum techniques
+- ✅ Analyze time & space complexity
+
+---
+
+## 📈 Future Scope
+
+- Sliding Window vs Hashing problems
+- Advanced hashing (rolling hash, Rabin-Karp)
+- Graph problems using HashMap
+- Competitive programming optimizations
+
+---
+
+## 👨‍💻 Author
+
+**Satinder Singh Sall**
+📚 DSA (Sigma 4.0 – Apna College)
+💻 Java Developer | Problem Solver
+
+**Satinder Singh Sall**
+Full-Stack Web/Mobile Engineer
+DSA | Java | Problem Solving
+
+---
+
+## ⭐ Final Note
+
+This repository demonstrates a **strong foundation in hashing**, combining:
+
+- Conceptual clarity
+- Clean coding practices
+- Efficient algorithms
+
+---
+
+# 🚀 Hashing in Data Structures & Algorithms (Java)
+
+---
+
+# 🚀 Hashing in Data Structures & Algorithms (Java)
+
+<p align="center">
+  <b>Efficient problem solving using HashMaps, HashSets & Prefix Sum techniques</b><br>
+  📚 Sigma 4.0 (Apna College) | 💻 Java | ⚡ Interview Preparation
+</p>
+
+---
+
+## 🏷️ Badges
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Language-Java-blue.svg">
+  <img src="https://img.shields.io/badge/DSA-Hashing-green.svg">
+  <img src="https://img.shields.io/badge/Level-Intermediate-orange.svg">
+  <img src="https://img.shields.io/badge/Status-Completed-brightgreen.svg">
+</p>
+
+---
+
+## 📌 Overview
+
+This repository contains a **complete implementation of Hashing concepts** in Java, covering:
+
+- Core data structures (`HashMap`, `HashSet`, `TreeMap`, etc.)
+- Custom HashMap implementation
+- Real-world DSA problems
+- Interview-focused patterns (Prefix Sum, Frequency Map)
+
+---
+
+## 🧠 Concepts Covered
+
+### 🔹 HashMap
+
+- Insert, Delete, Search → **O(1)**
+- Iteration using `keySet()` & `entrySet()`
+
+📂 Example:
+
+---
+
+### 🔹 HashSet & Variants
+
+- Unique elements storage
+- No duplicates
+
+| Type          | Feature         |
+| ------------- | --------------- |
+| HashSet       | Unordered       |
+| LinkedHashSet | Insertion order |
+| TreeSet       | Sorted          |
+
+📂 Examples:
+
+-
+- ***
+
+### 🔹 Map Variants Comparison
+
+| Structure     | Order           | Complexity |
+| ------------- | --------------- | ---------- |
+| HashMap       | No order        | O(1)       |
+| LinkedHashMap | Insertion order | O(1)       |
+| TreeMap       | Sorted          | O(log n)   |
+
+📂 Examples:
+
+-
+- ***
+
+### 🔹 Custom HashMap Implementation
+
+- Built using:
+  - Buckets (array)
+  - Chaining (LinkedList)
+
+- Includes: `put()`, `get()`, `remove()`
+
+📂 Code:
+
+---
+
+## 💻 Problem Solving
+
+### 🟢 Beginner
+
+#### ✅ Count Distinct Elements
+
+- Uses `HashSet`
+- Removes duplicates efficiently
+
+📂
+
+---
+
+### 🟡 Intermediate
+
+#### ✅ Union & Intersection of Arrays
+
+- Union → unique elements
+- Intersection → common elements
+
+📂
+
+---
+
+#### ✅ Valid Anagram
+
+- Character frequency matching
+
+📂
+
+---
+
+#### ✅ Majority Element (> n/3)
+
+- Frequency-based hashing
+
+📂
+
+---
+
+### 🔴 Advanced (Interview Level)
+
+#### ✅ Find Itinerary from Tickets
+
+- Graph-like traversal using HashMap
+
+📂
+
+---
+
+#### ✅ Largest Subarray with Sum = 0
+
+- Prefix Sum + HashMap
+
+📂
+
+---
+
+#### ✅ Subarray Sum = K
+
+- Prefix Sum + Frequency Map
+
+📂
+
+---
+
+## 📊 Key Patterns
+
+```text
+1. HashSet → Uniqueness
+2. HashMap → Frequency / Mapping
+3. Prefix Sum → Subarray Problems
+```
+
+---
+
+## ⚡ Complexity Summary
+
+| Operation | Time Complexity |
+| --------- | --------------- |
+| Insert    | O(1) avg        |
+| Search    | O(1) avg        |
+| Delete    | O(1) avg        |
+| TreeMap   | O(log n)        |
+
+---
+
+## 🧩 Project Structure
+
+```bash
+Hashing/
+│
+├── Core/
+│   ├── HashMap_Implementation.java
+│   ├── HashMap_Operations.java
+│   ├── LinkedHashMap_Operations.java
+│   ├── TreeMap_Operations.java
+│
+├── Sets/
+│   ├── HashSet_Operations.java
+│   ├── LinkedHashSet_Example.java
+│   ├── TreeSet_Example.java
+│
+├── Problems/
+│   ├── CountDistinctElements.java
+│   ├── UnionIntersection.java
+│   ├── FindItinerary.java
+│   ├── LargestSubarrayZeroSum.java
+│   ├── SubarraySumK.java
+│   ├── MajorityElement.java
+│   ├── ValidAnagram.java
+│
+└── Main.java
+```
+
+---
+
+## ▶️ How to Run
+
+```bash
+javac FileName.java
+java FileName
+```
+
+---
+
+## 🎯 Learning Outcomes
+
+✔ Strong understanding of hashing
+✔ Ability to solve subarray problems efficiently
+✔ Mastery of Java Collections
+✔ Interview-ready problem-solving skills
+
+---
+
+## 📈 Future Improvements
+
+- Sliding Window techniques
+- Advanced hashing (Rabin-Karp)
+- Graph problems with HashMap
+- Competitive programming optimizations
+
+---
+
+## 👨‍💻 Author
+
+**Satinder Singh Sall**
+💻 Java | DSA | Problem Solving
+
+---
+
+## ⭐ Final Thoughts
+
+> “Hashing is not just a data structure — it’s a problem-solving superpower.”
+
+---
