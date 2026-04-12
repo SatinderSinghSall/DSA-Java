@@ -17,6 +17,7 @@ public class Graph_AdjacencyList {
 
     public static void main(String[] args) {
         System.out.println("Graphs: Graph Implementation using Adjacency List.");
+        System.out.println();
 
         int vertices = 5;
 
@@ -47,9 +48,10 @@ public class Graph_AdjacencyList {
         graph[4].add(new Edge(4, 2, 2));
 
         // To find out the '2s' Neighbours:
+        System.out.print("Graph - Vertex '2s' Neighbours --> ");
         for (int i = 0; i < graph[2].size(); i ++) {
             Edge e = graph[2].get(i); // s, d, w
-            System.out.println(e.destination);
+            System.out.print(e.destination + " ");
         }
     }
 }
