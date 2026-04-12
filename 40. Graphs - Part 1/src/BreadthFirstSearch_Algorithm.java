@@ -12,6 +12,8 @@ Graph Structure
 */
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BreadthFirstSearch_Algorithm {
     static class Edge {
@@ -62,7 +64,34 @@ public class BreadthFirstSearch_Algorithm {
         graph[6].add(new Edge(6, 5, 1));
     }
 
+    // Method for Breath First Search Algorithm:
+    public static void BFS_Algorithm(ArrayList<Edge>[] graph) {
+        Queue<Integer> q = new LinkedList<>();
+        boolean vis[] = new boolean[graph.length];
+        q.add(0); // source = 0
+
+        while (!q.isEmpty()) {
+            int curr = q.remove();
+
+            if (!vis[curr]) { // visit -> curr
+                System.out.print(curr + " ");
+                vis[curr] = true;
+
+                for (int i = 0; i < graph[curr].size(); i ++) {
+                    Edge e = graph[curr].get(i);
+                    q.add(e.destination);
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Graphs: Breadth First Search Algorithm. (BFS)");
+
+        int V = 7;
+
+        ArrayList<Edge>[] graph = new ArrayList[V];
+        createGraph(graph);
+        BFS_Algorithm(graph);
     }
 }
