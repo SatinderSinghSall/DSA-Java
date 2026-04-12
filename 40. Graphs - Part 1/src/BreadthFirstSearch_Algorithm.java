@@ -64,7 +64,7 @@ public class BreadthFirstSearch_Algorithm {
         graph[6].add(new Edge(6, 5, 1));
     }
 
-    // Method for Breath First Search Algorithm:
+    // Method for Breath First Search Algorithm: BFS
     public static void BFS_Algorithm(ArrayList<Edge>[] graph) {
         Queue<Integer> q = new LinkedList<>();
         boolean vis[] = new boolean[graph.length];

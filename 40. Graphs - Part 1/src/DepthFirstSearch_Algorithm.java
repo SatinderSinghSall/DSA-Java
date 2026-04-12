@@ -1,4 +1,4 @@
-// Graphs: Depth First Search Algorithm. (BFS)
+// Graphs: Depth First Search Algorithm. (DFS)
 
 /*
 Graph Structure
@@ -62,7 +62,22 @@ public class DepthFirstSearch_Algorithm {
         graph[6].add(new Edge(6, 5, 1));
     }
 
+    // Method for Depth First Search Algorithm: DFS
+    public static void DFS_Algorithm(ArrayList<Edge>[] graph, int curr, boolean vis[]) {
+
+        System.out.print(curr + " ");
+        vis[curr] = true;
+
+        for (int i = 0; i < graph[curr].size(); i++) {
+            Edge e = graph[curr].get(i);
+
+            if (!vis[e.destination]) {
+                DFS_Algorithm(graph, e.destination, vis);
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println("Graphs: Depth First Search Algorithm. (BFS)");
+        System.out.println("Graphs: Depth First Search Algorithm. (DFS)");
     }
 }
