@@ -79,5 +79,12 @@ public class DepthFirstSearch_Algorithm {
 
     public static void main(String[] args) {
         System.out.println("Graphs: Depth First Search Algorithm. (DFS)");
+
+        int V = 7;
+
+        ArrayList<Edge>[] graph = new ArrayList[V];
+        createGraph(graph);
+        boolean vis[] = new boolean[V];
+        DFS_Algorithm(graph, 0, vis);
     }
 }
