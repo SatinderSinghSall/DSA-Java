@@ -1,7 +1,7 @@
 // Graphs: Depth First Search Algorithm. (DFS)
 
 /*
-Graph Structure
+Graph Structure:
         1 -------- 3
        /           | \
       /            |  \
