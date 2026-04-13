@@ -20,7 +20,7 @@ public class CycleDetection_UnDirected_Graph {
 
         // 0 - Vertex:
         graph[0].add(new Edge(0, 1));
-//        graph[0].add(new Edge(0, 2));
+        graph[0].add(new Edge(0, 2)); // Comment this for 'false' o/p
         graph[0].add(new Edge(0, 3));
 
         // 1 - Vertex:
@@ -28,7 +28,7 @@ public class CycleDetection_UnDirected_Graph {
         graph[1].add(new Edge(1, 2));
 
         // 2 - Vertex:
-//        graph[2].add(new Edge(2, 0));
+        graph[2].add(new Edge(2, 0)); // Comment this for 'false' o/p
         graph[2].add(new Edge(2, 1));
 
         // 3 - Vertex:
