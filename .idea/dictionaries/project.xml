@@ -3,6 +3,7 @@
     <words>
       <w>coun</w>
       <w>dest</w>
+      <w>dijkstras</w>
       <w>floyds</w>
       <w>heapify</w>
       <w>logn</w>
