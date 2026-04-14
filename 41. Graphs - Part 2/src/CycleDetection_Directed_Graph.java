@@ -3,100 +3,141 @@
 import java.util.ArrayList;
 
 public class CycleDetection_Directed_Graph {
+
+    // Edge class represents a directed edge from src -> dest
     static class Edge {
         int src;
         int dest;
 
-        public Edge(int s, int d) {
-            this.src = s;
-            this.dest = d;
+        Edge(int s, int d) {
+            src = s;
+            dest = d;
         }
     }
 
-    public static void  createGraph(ArrayList<Edge> graph[]) {
-        for (int i = 0; i < graph.length; i ++) {
+    // Function to create the graph using Adjacency List
+    public static void createGraph(ArrayList<Edge>[] graph) {
+
+        // Initialize each vertex with an empty ArrayList
+        for(int i = 0; i < graph.length; i++) {
             graph[i] = new ArrayList<>();
         }
 
-        // 0 - Vertex:
-        graph[0].add(new Edge(0, 1));
-        graph[0].add(new Edge(0, 2)); // Comment this for 'false' o/p
-        graph[0].add(new Edge(0, 3));
+        /*
+            Graph Diagram (Directed Graph)
 
-        // 1 - Vertex:
-        graph[1].add(new Edge(1, 0));
-        graph[1].add(new Edge(1, 2));
+                 0
+                 ↓
+                 1
+                 ↓
+                 2
+                 ↘
+                  0
 
-        // 2 - Vertex:
-        graph[2].add(new Edge(2, 0)); // Comment this for 'false' o/p
-        graph[2].add(new Edge(2, 1));
+            Edges:
+            0 → 1
+            1 → 2
+            2 → 0
 
-        // 3 - Vertex:
-        graph[3].add(new Edge(3, 0));
-        graph[3].add(new Edge(3, 4));
+            This forms a cycle:
+            0 → 1 → 2 → 0
+        */
 
-        // 4 - Vertex:
-        graph[4].add(new Edge(4, 3));
+        graph[0].add(new Edge(0,1));
+        graph[1].add(new Edge(1,2));
+        graph[2].add(new Edge(2,0)); // Back edge → creates cycle
     }
 
-    // Method HELPER util for Cycle Detection in Directed Graph:
-    public static boolean detectCycle_Util(ArrayList<Edge>[] graph, boolean vis[], int curr, int par) {
+
+    /*
+        DFS Helper Function
+
+        vis[]   → tracks visited nodes
+        stack[] → tracks nodes currently in recursion stack
+
+        If we encounter a node that is already in the recursion stack,
+        it means a back edge exists → cycle detected.
+    */
+
+    public static boolean detectCycleUtil(ArrayList<Edge>[] graph,
+                                          boolean vis[],
+                                          boolean stack[],
+                                          int curr) {
+
+        // Mark current node as visited
         vis[curr] = true;
 
-        for (int i = 0; i < graph[curr].size(); i ++) {
-            Edge e = graph[curr].get(i);
+        // Add node to recursion stack
+        stack[curr] = true;
 
-            // Cases to detect a Graph cycle:
+        // Traverse all neighbors of current node
+        for(Edge e : graph[curr]) {
 
-            // Case - 1:
-            if (!vis[e.dest]) {
-                if (detectCycle_Util(graph, vis, e.dest, curr)) {
-                    return true;
-                }
-
-                // Case - 2
-            } else if (vis[e.dest] && e.dest != par) {
+            // Case 1: If neighbor already exists in recursion stack
+            // → cycle detected
+            if(stack[e.dest]) {
                 return true;
             }
 
-            // Case - 3: Do Nothing i.e. continue
+            // Case 2: If neighbor not visited → DFS on that node
+            if(!vis[e.dest] &&
+                    detectCycleUtil(graph, vis, stack, e.dest)) {
+                return true;
+            }
         }
+
+        // Remove node from recursion stack before returning
+        stack[curr] = false;
 
         return false;
     }
 
-    // Method - Cycle Detection in Directed Graph using DFS Algorithm.
-    public static boolean detectCycle(ArrayList<Edge>[] graph) {
-        boolean vis[] = new boolean[graph.length];
 
-        for (int i = 0; i < graph.length; i ++) {
-            if (!vis[i]) {
-                if (detectCycle_Util(graph, vis, i, -1)) {
-                    return true; // Cycle exists in one of the parts.
+    // Main function to detect cycle in the directed graph
+    public static boolean detectCycle(ArrayList<Edge>[] graph) {
+
+        boolean vis[] = new boolean[graph.length];   // visited array
+        boolean stack[] = new boolean[graph.length]; // recursion stack
+
+        // Run DFS for all components of the graph
+        for(int i = 0; i < graph.length; i++) {
+
+            if(!vis[i]) {
+                if(detectCycleUtil(graph, vis, stack, i)) {
+                    return true; // Cycle found
                 }
             }
         }
 
-        return false;
+        return false; // No cycle found
     }
 
+
     public static void main(String[] args) {
-        System.out.println("Graphs: Cycle Detection in a Graph.");
 
         /*
-            0 ------- 3
-           /|         |
-          / |         |
-         1  |         4
-          \ |
-           \|
-            2
+            Example Directed Graph
+
+                 0
+                 ↓
+                 1
+                 ↓
+                 2
+                 ↘
+                  0
+
+            Cycle:
+            0 → 1 → 2 → 0
         */
 
-        int v = 5;
-        ArrayList<Edge> graph[] = new ArrayList[v];
+        int v = 3; // number of vertices
+
+        ArrayList<Edge>[] graph = new ArrayList[v];
+
+        // Create graph
         createGraph(graph);
 
-        System.out.println(detectCycle(graph));
+        // Check for cycle
+        System.out.println(detectCycle(graph)); // Output: true
     }
 }
