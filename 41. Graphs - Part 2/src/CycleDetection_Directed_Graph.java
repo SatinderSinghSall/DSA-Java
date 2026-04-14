@@ -114,6 +114,7 @@ public class CycleDetection_Directed_Graph {
 
 
     public static void main(String[] args) {
+        System.out.println("Graphs: Cycle Detection in Directed Graph using DFS Algorithm.");
 
         /*
             Example Directed Graph
