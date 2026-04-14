@@ -28,10 +28,10 @@ import java.util.ArrayList;
 public class BipartiteGraph {
     static class Edge {
         int src;
-        int desc;
+        int dest;
 
         public Edge(int s, int d) {
-            this.desc = d;
+            this.dest = d;
             this.src = s;
         }
     }
