@@ -39,7 +39,7 @@ public class CycleDetection_Directed_Graph {
         graph[4].add(new Edge(4, 3));
     }
 
-    // Method HELPER util for Cycle Detection in an Directed Graph:
+    // Method HELPER util for Cycle Detection in Directed Graph:
     public static boolean detectCycle_Util(ArrayList<Edge>[] graph, boolean vis[], int curr, int par) {
         vis[curr] = true;
 
@@ -65,7 +65,7 @@ public class CycleDetection_Directed_Graph {
         return false;
     }
 
-    // Method - Cycle Detection in an Directed Graph using DFS Algorithm.
+    // Method - Cycle Detection in Directed Graph using DFS Algorithm.
     public static boolean detectCycle(ArrayList<Edge>[] graph) {
         boolean vis[] = new boolean[graph.length];
 
