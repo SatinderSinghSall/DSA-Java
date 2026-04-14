@@ -20,10 +20,12 @@
 // 2 -> 3
 // 3 -> 1
 
-import java.util.ArrayList;
-import java.util.Stack;
+// Graphs: Topological Sorting using BFS - Kahn's Algorithm
+
+import java.util.*;
 
 public class TopologicalSorting {
+
     static class Edge {
         int src;
         int dest;
@@ -35,7 +37,7 @@ public class TopologicalSorting {
     }
 
     static void createGraph(ArrayList<Edge> graph[]) {
-        for (int i = 0; i < graph.length; i ++) {
+        for (int i = 0; i < graph.length; i++) {
             graph[i] = new ArrayList<>();
         }
 
@@ -50,34 +52,38 @@ public class TopologicalSorting {
         graph[5].add(new Edge(5, 2));
     }
 
-    // Method for Topological Sorting Helper Utility in a Graph.
-    public static void topologicalSortingUtil(ArrayList<Edge>[] graph, int curr, boolean vis[], Stack<Integer> stack) {
-        vis[curr] = true;
-
-        for (int i = 0; i < graph[curr].size(); i ++) {
-            Edge e = graph[curr].get(i);
-
-            if (!vis[e.dest]) {
-                topologicalSortingUtil(graph, e.dest, vis, stack);
+    // Calculate in-degree
+    static void calcIndeg(ArrayList<Edge> graph[], int indeg[]) {
+        for (int i = 0; i < graph.length; i++) {
+            for (Edge e : graph[i]) {
+                indeg[e.dest]++;
             }
         }
-
-        stack.push(curr);
     }
 
-    // Method for Topological Sorting in a Graph: Time Complexity - O(V+E)
-    public static void topologicalSorting(ArrayList<Edge>[] graph) {
-        boolean vis[] = new boolean[graph.length];
-        Stack<Integer> stack = new Stack<>();
+    // Kahn's Algorithm
+    static void topSort(ArrayList<Edge> graph[]) {
+        int indeg[] = new int[graph.length];
+        calcIndeg(graph, indeg);
 
-        for (int i = 0; i < graph.length; i ++) {
-            if (!vis[i]) {
-                topologicalSortingUtil(graph, i, vis, stack); // Modified DFS Method.
+        Queue<Integer> q = new LinkedList<>();
+
+        for (int i = 0; i < indeg.length; i++) {
+            if (indeg[i] == 0) {
+                q.add(i);
             }
         }
 
-        while (!stack.isEmpty()) {
-            System.out.print(stack.pop() + " ");
+        while (!q.isEmpty()) {
+            int curr = q.remove();
+            System.out.print(curr + " ");
+
+            for (Edge e : graph[curr]) {
+                indeg[e.dest]--;
+                if (indeg[e.dest] == 0) {
+                    q.add(e.dest);
+                }
+            }
         }
     }
 
@@ -85,10 +91,10 @@ public class TopologicalSorting {
         System.out.println("Graphs: Topological Sorting.");
 
         int v = 6;
-
         ArrayList<Edge> graph[] = new ArrayList[v];
+
         createGraph(graph);
 
-        topologicalSorting(graph);
+        topSort(graph);
     }
 }
