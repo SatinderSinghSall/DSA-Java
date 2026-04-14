@@ -110,5 +110,6 @@ public class DijkstrasAlgorithm {
         createGraph(graph);
 
         int src = 0;
+        DijkstrasAlgorithm_Logic(graph, src);
     }
 }
