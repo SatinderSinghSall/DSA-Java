@@ -626,3 +626,626 @@ These algorithms are widely used in:
 - Artificial intelligence
 
 ---
+
+# 📘 Graph Algorithms in Java
+
+---
+
+- Graph diagrams
+- Complexity tables
+- Clean GitHub formatting
+- Algorithm explanations
+- Pseudocode
+- Java implementations
+- Interview notes
+- Time & Space complexity tables
+
+This version is structured like a **top-tier GitHub DSA repository used for professional portfolios**.
+
+---
+
+# 📘 Graph Algorithms in Java
+
+### Data Structures & Algorithms — Sigma 4.0
+
+![Java](https://img.shields.io/badge/Language-Java-orange)
+![DSA](https://img.shields.io/badge/Topic-Graphs-blue)
+![Algorithms](https://img.shields.io/badge/Algorithms-BFS%20%7C%20DFS%20%7C%20Cycle%20Detection-success)
+![Level](https://img.shields.io/badge/Level-Beginner%20→%20Advanced-green)
+
+---
+
+# 📚 Overview
+
+This repository provides a **complete academic and professional guide to Graph Algorithms using Java**.
+
+The implementations progress **from fundamental graph theory to advanced traversal and graph analysis algorithms**.
+
+The following topics are covered:
+
+- Graph fundamentals
+- Graph representation using **Adjacency Lists**
+- Breadth First Search (BFS)
+- Depth First Search (DFS)
+- Connected Components
+- Bipartite Graph Detection
+- Cycle Detection (Undirected Graph)
+- Cycle Detection (Directed Graph)
+- Topological Sorting (Conceptual introduction)
+
+Each concept includes:
+
+✔ Theory
+✔ Algorithm explanation
+✔ Pseudocode
+✔ Java implementation
+✔ Complexity analysis
+
+---
+
+# 📖 What is a Graph?
+
+A **Graph** is a non-linear data structure consisting of:
+
+- **Vertices (Nodes)**
+- **Edges (Connections between vertices)**
+
+### Mathematical Representation
+
+```
+G = (V, E)
+```
+
+Where
+
+```
+V = set of vertices
+E = set of edges
+```
+
+---
+
+# 🔹 Types of Graphs
+
+| Type             | Description             |
+| ---------------- | ----------------------- |
+| Directed Graph   | Edges have direction    |
+| Undirected Graph | Edges are bidirectional |
+| Weighted Graph   | Edges contain weights   |
+| Unweighted Graph | Edges have equal cost   |
+| Cyclic Graph     | Contains cycles         |
+| Acyclic Graph    | No cycles               |
+
+---
+
+# 📊 Graph Example Used in This Project
+
+```
+        1 -------- 3
+       /           | \
+      /            |  \
+     0             |   5 -------- 6
+      \            |  /
+       \           | /
+        2 -------- 4
+```
+
+Vertices
+
+```
+0,1,2,3,4,5,6
+```
+
+Edges
+
+```
+0–1
+0–2
+1–3
+2–4
+3–4
+3–5
+4–5
+5–6
+```
+
+---
+
+# 🧱 Graph Representation
+
+## Problem
+
+Design an efficient way to represent a graph in memory.
+
+Two common approaches:
+
+1️⃣ **Adjacency Matrix**
+2️⃣ **Adjacency List** (used in this project)
+
+---
+
+# Adjacency List Representation
+
+Each vertex stores a list of its neighbors.
+
+Example:
+
+```
+0 → 1,2
+1 → 0,3
+2 → 0,4
+3 → 1,4,5
+4 → 2,3,5
+5 → 3,4,6
+6 → 5
+```
+
+---
+
+## Algorithm Idea
+
+1. Create an array of lists
+2. Each index represents a vertex
+3. Store connected neighbors in the list
+
+---
+
+## Pseudocode
+
+```
+create graph[V]
+
+for each vertex i
+    graph[i] = empty list
+
+add edges
+```
+
+---
+
+## Java Implementation
+
+```java
+static class Edge {
+    int source;
+    int destination;
+    int weight;
+
+    Edge(int s, int d, int w) {
+        source = s;
+        destination = d;
+        weight = w;
+    }
+}
+
+ArrayList<Edge>[] graph = new ArrayList[vertices];
+
+for(int i = 0; i < vertices; i++){
+    graph[i] = new ArrayList<>();
+}
+```
+
+---
+
+# 🚶 Breadth First Search (BFS)
+
+## Problem
+
+Traverse a graph **level by level** starting from a source vertex.
+
+---
+
+## Concept
+
+BFS explores nodes in this order:
+
+```
+current node
+→ all neighbors
+→ neighbors of neighbors
+```
+
+It uses a **Queue (FIFO)** data structure.
+
+---
+
+## Algorithm
+
+1. Start from source node
+2. Mark node as visited
+3. Add node to queue
+4. Visit neighbors
+5. Repeat until queue is empty
+
+---
+
+## Pseudocode
+
+```
+BFS(graph):
+
+create queue
+create visited array
+
+enqueue start vertex
+
+while queue not empty
+    node = dequeue
+
+    if node not visited
+        mark visited
+        print node
+
+        for each neighbour
+            enqueue neighbour
+```
+
+---
+
+## Java Implementation
+
+```java
+Queue<Integer> q = new LinkedList<>();
+boolean vis[] = new boolean[graph.length];
+
+q.add(0);
+
+while (!q.isEmpty()) {
+
+    int curr = q.remove();
+
+    if (!vis[curr]) {
+
+        System.out.print(curr + " ");
+        vis[curr] = true;
+
+        for (int i = 0; i < graph[curr].size(); i++) {
+            Edge e = graph[curr].get(i);
+            q.add(e.destination);
+        }
+    }
+}
+```
+
+---
+
+## BFS Traversal Example
+
+```
+0 1 2 3 4 5 6
+```
+
+---
+
+## Complexity
+
+| Metric           | Value        |
+| ---------------- | ------------ |
+| Time Complexity  | **O(V + E)** |
+| Space Complexity | **O(V)**     |
+
+---
+
+# 🌳 Depth First Search (DFS)
+
+## Problem
+
+Traverse graph **as deep as possible before backtracking**.
+
+---
+
+## Concept
+
+DFS uses:
+
+```
+Recursion
+or
+Stack
+```
+
+Traversal order goes **deep first**.
+
+---
+
+## Algorithm
+
+1. Visit node
+2. Mark visited
+3. Recursively visit neighbors
+
+---
+
+## Pseudocode
+
+```
+DFS(node)
+
+mark node visited
+print node
+
+for each neighbour
+    if not visited
+        DFS(neighbour)
+```
+
+---
+
+## Java Implementation
+
+```java
+public static void DFS(ArrayList<Edge>[] graph, int curr, boolean vis[]) {
+
+    System.out.print(curr + " ");
+    vis[curr] = true;
+
+    for (int i = 0; i < graph[curr].size(); i++) {
+
+        Edge e = graph[curr].get(i);
+
+        if (!vis[e.destination]) {
+            DFS(graph, e.destination, vis);
+        }
+    }
+}
+```
+
+---
+
+## DFS Traversal Example
+
+```
+0 1 3 4 2 5 6
+```
+
+---
+
+## Complexity
+
+| Metric           | Value        |
+| ---------------- | ------------ |
+| Time Complexity  | **O(V + E)** |
+| Space Complexity | **O(V)**     |
+
+---
+
+# 🔗 Connected Components
+
+## Problem
+
+Identify **separate groups of connected vertices** in a graph.
+
+Example:
+
+```
+Component 1: 0 - 1 - 2
+Component 2: 3 - 4
+```
+
+---
+
+## Algorithm
+
+1. Create visited array
+2. Traverse all vertices
+3. If vertex not visited → run DFS/BFS
+4. That traversal forms one connected component
+
+---
+
+## Complexity
+
+| Metric          | Value        |
+| --------------- | ------------ |
+| Time Complexity | **O(V + E)** |
+
+---
+
+# 🎨 Bipartite Graph Detection
+
+## Problem
+
+Determine if a graph can be divided into **two sets of vertices** such that no edge connects vertices in the same set.
+
+---
+
+## Example
+
+```
+      0
+     / \
+    1   2
+    |   |
+    3---4
+```
+
+---
+
+## Algorithm
+
+Use **BFS coloring**.
+
+1. Assign color to first node
+2. Assign opposite color to neighbors
+3. If neighbor has same color → NOT bipartite
+
+---
+
+## Complexity
+
+| Metric           | Value        |
+| ---------------- | ------------ |
+| Time Complexity  | **O(V + E)** |
+| Space Complexity | **O(V)**     |
+
+---
+
+# 🔄 Cycle Detection (Undirected Graph)
+
+## Problem
+
+Detect if an **undirected graph contains a cycle**.
+
+---
+
+## Algorithm
+
+Use **DFS with parent tracking**.
+
+If a visited node is encountered that **is not the parent**, a cycle exists.
+
+---
+
+## Complexity
+
+```
+Time Complexity: O(V + E)
+Space Complexity: O(V)
+```
+
+---
+
+# 🔁 Cycle Detection (Directed Graph)
+
+## Problem
+
+Detect cycles in a **directed graph**.
+
+---
+
+## Algorithm
+
+Use **DFS with recursion stack**.
+
+If a node appears in the recursion stack again → cycle exists.
+
+---
+
+## Complexity
+
+| Metric           | Value        |
+| ---------------- | ------------ |
+| Time Complexity  | **O(V + E)** |
+| Space Complexity | **O(V)**     |
+
+---
+
+# 🔝 Topological Sorting
+
+Topological sorting is used for **Directed Acyclic Graphs (DAGs)**.
+
+It produces an ordering such that:
+
+```
+For every edge U → V
+U appears before V
+```
+
+---
+
+## Example
+
+```
+5 → 2 → 3
+↓         ↓
+4 → 0 → 1
+```
+
+Possible order
+
+```
+5 4 2 3 1 0
+```
+
+---
+
+# 🧠 Complexity Summary
+
+| Algorithm                    | Time Complexity | Space Complexity |
+| ---------------------------- | --------------- | ---------------- |
+| BFS                          | O(V + E)        | O(V)             |
+| DFS                          | O(V + E)        | O(V)             |
+| Bipartite Check              | O(V + E)        | O(V)             |
+| Cycle Detection (Undirected) | O(V + E)        | O(V)             |
+| Cycle Detection (Directed)   | O(V + E)        | O(V)             |
+
+---
+
+# 🌍 Real-World Applications
+
+Graphs are widely used in:
+
+- Google Maps navigation
+- Social networks
+- Network routing
+- Recommendation systems
+- Web crawling
+- Dependency resolution
+- Task scheduling
+
+---
+
+# 📁 Project Structure
+
+```
+Graphs-DSA/
+│
+├── BipartiteGraph.java
+├── ConnectedComponents.java
+├── CycleDetection_Directed_Graph.java
+├── CycleDetection_UnDirected_Graph.java
+├── TopologicalSorting.java
+├── Main.java
+│
+└── README.md
+```
+
+---
+
+# 🎯 Key Learning Outcomes
+
+After completing this module, you can:
+
+- Represent graphs using adjacency lists
+- Implement BFS traversal
+- Implement DFS traversal
+- Detect graph cycles
+- Identify bipartite graphs
+- Understand connected components
+- Apply graph algorithms to real-world problems
+
+---
+
+# 💡 Interview Notes
+
+Common interview questions related to these topics:
+
+- Difference between **BFS and DFS**
+- Detect cycle in a graph
+- Check if graph is bipartite
+- Find connected components
+- Perform topological sort
+- Detect cycle in directed graph
+
+---
+
+# 👨‍💻 Author Notes
+
+This README is designed for:
+
+- **Academic documentation**
+- **DSA interview preparation**
+- **Professional GitHub portfolio**
+
+---
+
+# 🚀 Future Improvements
+
+This project will later include:
+
+- Dijkstra’s Algorithm
+- Minimum Spanning Tree
+- Union-Find
+- Advanced graph problems
+
+---
