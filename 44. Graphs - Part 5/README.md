@@ -1409,3 +1409,909 @@ Kruskal is used in:
 - Image segmentation
 
 ---
+
+# Problem - 4
+
+## Flood Fill Algorithm
+
+![Image](https://images.openai.com/static-rsc-4/J_oDLoBspcOGA5pNESb4XvHWBiZxJnsxL8jQICT1v1nYv5SNoC1otI9a9DRqsUopamTXXkgyk9-52F2OetOx93EZeQnFA-YZOgC9ZqXydKOoWNWSWzENJyG_hFIzZblGB7k5bNpbfCqVOYnKePDIqQTD3MCVKJTsfGUbMUrhEiI-AsIW_Lo2psEfDIdUj8qH?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/7hED2ntP6ZwT9PL21j_He_rEV1zLLBDwAoKW8SfjEMpRxlISHDsS9p9uQIk4AcPzSAD7CNFgufrq-A6HrZzfVQ4CEWqk2SaOKRbZX88TsBAivgZcvsc8LoNpv36PpEIuWIZhrhqCaa2iJmXCbllo1q3BM6g3f0dOEWd4JlElFVRXAS3i_YuaQPF4yZ_iZwsc?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/wx7av75QMnxJs9yCoSeO8Vi-ZerhAcBUfUYullea8ddBpf_k2l5dfkwC2UTn3lUWHiNrgDThFvhr8otB4fDjh5nx89rRqmfiaM1MIPGxAuDOHDBBbsFA0z8f1JnR2FLeGaqCrNgyPUBX06FlJOtKWdbTXAX6VN-7gw1jefA9EYqdMtJe-WXGbUwr2Uiyf1L-?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/k7Km_yFcMy-u7vaLNwwizeem8zIjxYTi6P8RpHrVlOLO71QFurk59fIUUaXsUgXhhrWikf2cKQah2xh1fFw8E0UhxYa4ypzBasLkAL8D3jmbrBWhu6IY-_e-PJP5iOoPv5mPnuFxJfOQTBJlGQoD27FEv55nONtzq6rOEp7Wrca_LS5FHq3OWJ8bqhIAuuDu?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/4KLigT78DJcwfksCxy8MW2M2Htr5wO5o6H5HF8G6_jzTSyEYhtgNbyOB3osB8TWQbWNKQRmqbazJpXl_hJIuKna7q3ROPvj2tFd-OxrDpA4CR98jYGZAJfeG38jkzQsMZpfxTSmkBwXJAx8KaV1zAz0T7NRENhZYVKw28G9TrLESBG4pStuKMKQQD3cBzPN1?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/aqRaU_LiwjdCVPkbmAhVo1RQexuSFCdH-d4tYRqYOaiHB4oIJtyCrilpjQ8FZL9hdlK-o970UFP9NOfQo31dqHVY8GOk5B-arhO8R7NEjw_d8aYRuVYpZ8lXVsS5hbfZlCeVZPs8p4UHabFuvtnIrlRHXidx4qOCPb79akKmeVKnkmt2W4ere_QA2yrSz3FB?purpose=fullsize)
+
+---
+
+# 1. Problem Statement
+
+You are given a **2D grid (image)**.
+
+Each cell represents a **pixel color**.
+
+Input:
+
+```text
+image[i][j] = pixel color
+```
+
+You are also given:
+
+```text
+sr → starting row
+sc → starting column
+color → new color
+```
+
+Goal:
+
+```text
+Change the color of the starting pixel and all
+connected pixels with the same color.
+```
+
+Connectivity is **4-directional**:
+
+```
+up
+down
+left
+right
+```
+
+---
+
+# 2. Example
+
+Input:
+
+```
+image = [
+ [1,1,1],
+ [1,1,0],
+ [1,0,1]
+]
+
+sr = 1
+sc = 1
+color = 2
+```
+
+Starting pixel:
+
+```
+image[1][1] = 1
+```
+
+We replace **all connected 1's**.
+
+Output:
+
+```
+[
+ [2,2,2],
+ [2,2,0],
+ [2,0,1]
+]
+```
+
+---
+
+# 3. Key Idea
+
+Flood Fill works like **spreading paint in a region**.
+
+Steps:
+
+1. Start from `(sr, sc)`
+2. If neighbor pixel has **same color**
+3. Change its color
+4. Continue spreading
+
+This is exactly a **Graph Traversal Problem**.
+
+We can solve it using:
+
+```
+DFS (Depth First Search)
+or
+BFS (Breadth First Search)
+```
+
+Most implementations use **DFS recursion**.
+
+---
+
+# 4. Visualization
+
+Original grid:
+
+```
+1 1 1
+1 1 0
+1 0 1
+```
+
+Start at:
+
+```
+(1,1)
+```
+
+Flood spreads:
+
+```
+1 → 2
+```
+
+Final grid:
+
+```
+2 2 2
+2 2 0
+2 0 1
+```
+
+---
+
+# 5. Algorithm Steps
+
+1️⃣ Store **original color**
+
+```
+oldColor = image[sr][sc]
+```
+
+2️⃣ If oldColor == newColor
+
+```
+return image
+```
+
+3️⃣ Run DFS
+
+4️⃣ Change color of connected cells
+
+---
+
+# 6. Pseudocode
+
+```
+floodFill(image, sr, sc, newColor)
+
+oldColor = image[sr][sc]
+
+DFS(sr, sc)
+
+DFS(r, c)
+
+if out of bounds
+    return
+
+if image[r][c] != oldColor
+    return
+
+image[r][c] = newColor
+
+DFS(r+1, c)
+DFS(r-1, c)
+DFS(r, c+1)
+DFS(r, c-1)
+```
+
+---
+
+# 7. Java Implementation
+
+_(Same comment style as your previous algorithms)_
+
+```java
+// Graphs: Flood Fill Algorithm
+
+import java.util.*;
+
+public class FloodFill {
+
+    public static void helper(int[][] image, int sr, int sc, int color,
+                              boolean vis[][], int originalColor) {
+
+        int n = image.length;
+        int m = image[0].length;
+
+        // boundary check
+        if(sr < 0 || sc < 0 || sr >= n || sc >= m) {
+            return;
+        }
+
+        // already visited
+        if(vis[sr][sc]) {
+            return;
+        }
+
+        // different color
+        if(image[sr][sc] != originalColor) {
+            return;
+        }
+
+        // mark visited
+        vis[sr][sc] = true;
+
+        // change color
+        image[sr][sc] = color;
+
+        // explore neighbors
+        helper(image, sr+1, sc, color, vis, originalColor);
+        helper(image, sr-1, sc, color, vis, originalColor);
+        helper(image, sr, sc+1, color, vis, originalColor);
+        helper(image, sr, sc-1, color, vis, originalColor);
+    }
+
+    // Flood Fill Method
+    public static int[][] floodFill(int[][] image, int sr, int sc, int color) {
+
+        int originalColor = image[sr][sc];
+
+        boolean vis[][] = new boolean[image.length][image[0].length];
+
+        helper(image, sr, sc, color, vis, originalColor);
+
+        return image;
+    }
+
+    public static void main(String args[]) {
+
+        int image[][] = {
+                {1,1,1},
+                {1,1,0},
+                {1,0,1}
+        };
+
+        int sr = 1;
+        int sc = 1;
+        int color = 2;
+
+        int ans[][] = floodFill(image, sr, sc, color);
+
+        for(int i=0;i<ans.length;i++) {
+            for(int j=0;j<ans[0].length;j++) {
+                System.out.print(ans[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+---
+
+# 8. Output
+
+```
+2 2 2
+2 2 0
+2 0 1
+```
+
+---
+
+# 9. Time Complexity
+
+| Operation | Complexity   |
+| --------- | ------------ |
+| Traversal | **O(N × M)** |
+
+Where:
+
+```
+N = rows
+M = columns
+```
+
+Because every pixel may be visited once.
+
+---
+
+# 10. Space Complexity
+
+```
+O(N × M)
+```
+
+Due to recursion stack + visited array.
+
+---
+
+# 11. Real World Applications
+
+Flood Fill is used in:
+
+🖌 **Paint Bucket Tool (Photoshop / MS Paint)**
+🗺 **Map coloring problems**
+🧩 **Connected region detection**
+📷 **Image segmentation**
+
+---
+
+# 12. Interview Insights
+
+Flood Fill is basically:
+
+```
+DFS / BFS on a grid
+```
+
+Very similar to problems like:
+
+- **Number of Islands**
+- **Surrounded Regions**
+- **Rotting Oranges**
+- **Connected Components in Matrix**
+
+---
+
+Below is a **complete professional `README.md`** tailored to everything you studied in this **Graph (Part 5) module of Sigma 4.0 DSA** based on the screenshots and algorithms you implemented.
+
+It is written in **academic + professional style**, suitable for:
+
+- GitHub portfolio
+- University coursework
+- Interview preparation documentation
+- Open-source repositories
+
+It includes:
+
+- theory
+- algorithm explanation
+- pseudocode
+- Java code examples
+- complexity analysis
+- interview notes
+
+---
+
+# Graph Algorithms – Advanced Concepts (Sigma 4.0 DSA)
+
+## Overview
+
+This repository documents my learning and implementation of **advanced graph algorithms** from the **Sigma 4.0 Data Structures and Algorithms course**.
+
+The focus of this module is on solving **real-world graph problems** using efficient algorithms and data structures.
+
+The implementations are written in **Java** and follow a structured approach including:
+
+- Problem understanding
+- Algorithm design
+- Pseudocode
+- Java implementation
+- Complexity analysis
+
+---
+
+# Topics Covered
+
+This module covers the following algorithms and problem types:
+
+1. Cheapest Flights Within K Stops
+2. Connecting Cities with Minimum Cost
+3. Disjoint Set (Union-Find)
+4. Kruskal’s Algorithm
+5. Flood Fill Algorithm
+6. Graph Traversal Applications
+7. DFS Based Graph Problems
+
+---
+
+# Graph Fundamentals
+
+A **graph** is a data structure consisting of:
+
+- **Vertices (Nodes)**
+- **Edges (Connections)**
+
+Graphs can be represented using:
+
+### Adjacency List
+
+```
+
+ArrayList<Edge>[] graph
+
+```
+
+### Adjacency Matrix
+
+```
+
+int graph[][]
+
+```
+
+---
+
+# 1. Cheapest Flights Within K Stops
+
+## Problem
+
+Given a list of flights:
+
+```
+
+flights[i] = [from, to, price]
+
+```
+
+Find the **minimum cost to travel from src to dst with at most K stops**.
+
+---
+
+## Algorithm
+
+This problem is solved using a **modified BFS / shortest path approach**.
+
+Key idea:
+
+Track
+
+```
+
+node
+cost
+number of stops
+
+```
+
+We stop exploring when stops exceed **K**.
+
+---
+
+## Pseudocode
+
+```
+
+Create adjacency list from flights
+
+Initialize distance array
+
+Queue ← (src, cost=0, stops=0)
+
+while queue not empty
+
+remove node
+
+if stops > K
+continue
+
+for neighbors
+
+if cheaper path found
+update distance
+push neighbor to queue
+
+```
+
+---
+
+## Java Implementation
+
+```java
+class Info {
+    int node;
+    int cost;
+    int stops;
+
+    Info(int n, int c, int s){
+        node = n;
+        cost = c;
+        stops = s;
+    }
+}
+```
+
+---
+
+## Complexity
+
+Time Complexity
+
+```
+
+O(E)
+
+```
+
+Space Complexity
+
+```
+
+O(V)
+
+```
+
+---
+
+# 2. Connecting Cities with Minimum Cost
+
+## Problem
+
+Given a matrix representing the cost to connect cities:
+
+```
+
+cities\[i]\[j]
+
+```
+
+Find the **minimum cost required to connect all cities**.
+
+---
+
+## Algorithm
+
+This is a **Minimum Spanning Tree (MST)** problem.
+
+Solved using **Prim's Algorithm**.
+
+Steps:
+
+1. Start from any node
+2. Pick smallest edge
+3. Add new vertex
+4. Continue until all vertices connected
+
+---
+
+## Pseudocode
+
+```
+
+visited\[ ] = false
+
+pq.add(startNode, cost=0)
+
+while pq not empty
+
+remove smallest cost node
+
+if not visited
+add cost to MST
+
+push neighbors
+
+```
+
+---
+
+## Java Implementation
+
+```java
+PriorityQueue<Pair> pq = new PriorityQueue<>();
+
+pq.add(new Pair(0,0));
+
+while(!pq.isEmpty()){
+
+Pair curr = pq.remove();
+
+if(!vis[curr.node]){
+
+vis[curr.node] = true;
+
+finalCost += curr.cost;
+
+for(int i=0;i<n;i++){
+if(cities[curr.node][i] != 0)
+pq.add(new Pair(i, cities[curr.node][i]));
+}
+}
+}
+```
+
+---
+
+## Complexity
+
+```
+
+O(E log V)
+
+```
+
+---
+
+# 3. Disjoint Set (Union-Find)
+
+## Problem
+
+Efficiently manage **dynamic connectivity** between nodes.
+
+Supports two operations:
+
+```
+
+find(x)
+union(a,b)
+
+```
+
+---
+
+## Optimization Techniques
+
+### Path Compression
+
+Flattens the tree during find operation.
+
+### Union by Rank
+
+Attach smaller tree under larger tree.
+
+---
+
+## Pseudocode
+
+```
+
+find(x)
+if parent\[x] == x
+return x
+
+parent\[x] = find(parent\[x])
+
+```
+
+```
+
+union(a,b)
+
+rootA = find(a)
+rootB = find(b)
+
+if rank[rootA] < rank[rootB]
+parent[rootA] = rootB
+else
+parent[rootB] = rootA
+
+```
+
+---
+
+## Java Implementation
+
+```java
+static int find(int x){
+
+if(parent[x] == x)
+return x;
+
+return parent[x] = find(parent[x]);
+}
+```
+
+---
+
+## Complexity
+
+```
+
+O(α(n))
+
+```
+
+(Almost constant time)
+
+---
+
+# 4. Kruskal’s Algorithm
+
+## Problem
+
+Find the **Minimum Spanning Tree** of a graph.
+
+---
+
+## Algorithm
+
+Greedy approach:
+
+1. Sort edges by weight
+2. Pick smallest edge
+3. Check if cycle forms
+4. If not → add edge
+5. Use **Disjoint Set** to detect cycles
+
+---
+
+## Pseudocode
+
+```
+
+sort edges
+
+for edge in edges
+
+if find(u) != find(v)
+
+union(u,v)
+add weight
+
+```
+
+---
+
+## Java Implementation
+
+```java
+Collections.sort(edges);
+
+for(Edge e : edges){
+
+if(find(e.src) != find(e.dest)){
+
+union(e.src, e.dest);
+
+mstCost += e.wt;
+
+}
+}
+```
+
+---
+
+## Complexity
+
+```
+
+O(E log E)
+
+```
+
+---
+
+# 5. Flood Fill Algorithm
+
+## Problem
+
+Given a **2D grid image**, replace the color of connected pixels starting from:
+
+```
+
+(sr, sc)
+
+```
+
+---
+
+## Algorithm
+
+Flood Fill is equivalent to **DFS on a grid**.
+
+Steps:
+
+1. Check bounds
+2. Check original color
+3. Replace color
+4. Explore neighbors
+
+```
+
+up
+down
+left
+right
+
+```
+
+---
+
+## Pseudocode
+
+```
+
+DFS(r,c)
+
+if out of bounds
+return
+
+if color not same
+return
+
+image\[r]\[c] = newColor
+
+DFS neighbors
+
+```
+
+---
+
+## Java Implementation
+
+```java
+void dfs(int r, int c){
+
+if(r < 0 || c < 0 || r >= n || c >= m)
+return;
+
+if(image[r][c] != originalColor)
+return;
+
+image[r][c] = newColor;
+
+dfs(r+1,c);
+dfs(r-1,c);
+dfs(r,c+1);
+dfs(r,c-1);
+}
+```
+
+---
+
+## Complexity
+
+```
+
+O(N × M)
+
+```
+
+---
+
+# Real World Applications
+
+Graph algorithms are used in:
+
+- GPS navigation systems
+- Flight route optimization
+- Network routing
+- Image processing
+- Social networks
+- Infrastructure planning
+
+---
+
+# Interview Insights
+
+Important patterns learned in this module:
+
+### Shortest Path Problems
+
+- Dijkstra
+- Modified BFS
+
+### Minimum Spanning Tree
+
+- Prim’s Algorithm
+- Kruskal’s Algorithm
+
+### Connectivity Problems
+
+- Disjoint Set (Union-Find)
+
+### Grid Traversal Problems
+
+- Flood Fill
+- DFS / BFS on matrix
+
+---
+
+# Learning Outcomes
+
+After completing this module I gained strong understanding of:
+
+- Advanced graph algorithms
+- Greedy algorithms
+- Graph traversal strategies
+- Minimum spanning tree construction
+- Connectivity structures
+- Real-world graph problem modeling
+
+---
+
+# Author
+
+Satinder Singh
+Sigma 4.0 – Data Structures and Algorithms
