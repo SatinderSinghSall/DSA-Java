@@ -678,3 +678,381 @@ This problem can appear in interviews as:
 All of these are **Minimum Spanning Tree problems**.
 
 ---
+
+## Disjoint Set (Union–Find Data Structure)
+
+![Image](https://images.openai.com/static-rsc-4/TG6UAE9UMyoGf3_-x03IIcIq8nWTLULIbsH2T-ZQ2lIatHrCkTbJLFl40pGqESRlhCiGi_QD2M1doVVhRsi0nw_Rzkiw-q94sii81ixRmoEjDFCOTGdSUhtdmuUdq6wHFhPg9CleQOGcp_EnfF8QxG_WOC_p2z8hsaXyuO2TIYCRNzg8B8XTj9l4k1p7st5A?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/aihaZvFP4MPooxHkH7k3ot4uy__SPQIfLe4u91flMOr97OTU3n7TcP_1FSN5Rqliz7kjgEiUYbYVCmjjduokox_a_PZXnzeL8VwINQm8CLhpoehceAr8ZGY_R-JZqjAA1VCSMDVMDhyPYalcN4oDTZ5AMGiQYcWZ16cEi2yKRHKHXuY-jHx-0aN4AMuQtFxO?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/LsE9B8xmMBYCPvuR5TGAfyRVjph9qBYz85MIDs_88kbX-ARE8ZNlrf8XYGwt4FEPzG-e4uhsALTzWCCZ9pwXJKJv5H_EqBFkQaebjxlx8QoL0HV2ZTtdqmzWUBNZxK4mgIYw3TuW1BxobyYEeWvZEh_FRKXo3cCDt3Z_VgEu2A7ondBRxmS4MaYcP9BGQZf3?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/IMGyLwUElskGzCTLoqlTyez30abXGfbpQ1WQVvLxTWmh8-YcpvVhm1lobPRuQL0NUm-H_s8msernsLP23I3-MZJjw4t2Pgs8c6vIJfcVUunonMVKo1965uwjU1q-jUPrbiebgDo9hH1ju2lTAYy1S83SU8MHPNgf5XS_RZko_hUZXyPnEitVo5Sa8t5sdpmp?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/qTXT-H9FIdUfM4OJsuaDPXjTuroVT24LQiHc2eXWTyimDvmREfAQvKKC9bLKY8zNZyTytDxJwuLWf5HDj4UayRb39cZs2ZFSkQf1S5p1elFAOpOX5N5XHyE7LrglbNDD6FFQKQWEhqqZ1rWRzX-KF0iGNFywLmqtTxdAqBp_MTWT8GMkYl763yC_jj8YK8nL?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/RnWteI0xxH_7vKTY9xG7P4ZFlU__AG94bpSqfQl6m8PqiIHkJ81I4qiFqmKAGmyWKwTs906g-OiGrsLz3yhSk_iX6Ed5C1D_RwVzAXcMAGixsMEwlGP7-92QH6m3JrM-BExDOSNuIKhfgMrp-8I7_PNYiKmrh4DEEzjUJwSh6rSNnj00wz0odmbmCRcimxdv?purpose=fullsize)
+
+---
+
+# 1. Problem / Motivation
+
+Many graph problems require us to **track which nodes belong to the same connected component**.
+
+Example situations:
+
+- Detecting **cycles in a graph**
+- Building **Minimum Spanning Trees (Kruskal's Algorithm)**
+- Checking if two nodes are **connected**
+- Network connectivity problems
+
+Instead of repeatedly running BFS/DFS, we use a **Disjoint Set Data Structure (Union–Find)**.
+
+---
+
+# 2. What is a Disjoint Set?
+
+A **Disjoint Set** is a data structure that maintains a collection of **non-overlapping sets**.
+
+Each element belongs to **exactly one set**.
+
+Example:
+
+```text
+Initial sets:
+
+{1} {2} {3} {4} {5}
+```
+
+After some unions:
+
+```text
+{1,2,3} {4,5}
+```
+
+---
+
+# 3. Core Operations
+
+A Disjoint Set supports two main operations:
+
+### 1️⃣ Find
+
+```text
+find(x)
+```
+
+Returns the **representative (leader/root)** of the set containing `x`.
+
+Example:
+
+```text
+Set = {1,2,3}
+
+find(2) → 1
+```
+
+---
+
+### 2️⃣ Union
+
+```text
+union(a,b)
+```
+
+Merges the two sets containing `a` and `b`.
+
+Example:
+
+```text
+union(1,2)
+
+Before:
+{1} {2}
+
+After:
+{1,2}
+```
+
+---
+
+# 4. Internal Representation
+
+Disjoint sets are implemented using **trees**.
+
+Each node stores its **parent**.
+
+Example:
+
+```text
+3 → 2 → 1
+```
+
+Root is:
+
+```text
+1
+```
+
+So:
+
+```text
+find(3) = 1
+```
+
+---
+
+# 5. Optimizations
+
+To make operations very fast we use:
+
+## 1️⃣ Path Compression
+
+When performing `find(x)` we **directly attach nodes to the root**.
+
+Example:
+
+Before:
+
+```
+4 → 3 → 2 → 1
+```
+
+After `find(4)`:
+
+```
+4
+3
+2
+ \
+  1
+```
+
+Tree becomes **flatter**.
+
+---
+
+## 2️⃣ Union by Rank
+
+Attach the **smaller tree under the bigger tree**.
+
+This keeps tree height small.
+
+---
+
+# 6. Time Complexity
+
+| Operation | Complexity |
+| --------- | ---------- |
+| Find      | O(α(n))    |
+| Union     | O(α(n))    |
+
+Where:
+
+```
+α(n) = Inverse Ackermann Function
+```
+
+This grows **extremely slowly** → practically **O(1)**.
+
+---
+
+# 7. Algorithm Structure
+
+We maintain two arrays:
+
+```
+parent[]
+rank[]
+```
+
+Example:
+
+```
+parent[i] = parent of node i
+rank[i] = depth of tree
+```
+
+---
+
+# 8. Pseudocode
+
+### Initialization
+
+```
+for each node i
+    parent[i] = i
+    rank[i] = 0
+```
+
+### Find
+
+```
+find(x)
+    if parent[x] == x
+        return x
+    parent[x] = find(parent[x])
+    return parent[x]
+```
+
+### Union
+
+```
+union(a,b)
+
+rootA = find(a)
+rootB = find(b)
+
+if rank[rootA] < rank[rootB]
+    parent[rootA] = rootB
+
+else if rank[rootA] > rank[rootB]
+    parent[rootB] = rootA
+
+else
+    parent[rootB] = rootA
+    rank[rootA]++
+```
+
+---
+
+# 9. Java Implementation
+
+_(Following the same comment style as your previous graph codes)_
+
+```java
+// Graphs: Disjoint Set (Union Find)
+
+import java.util.*;
+
+public class DisjointSet {
+
+    static int n = 8;
+
+    static int parent[] = new int[n];
+    static int rank[] = new int[n];
+
+    // Initialize sets
+    public static void init() {
+
+        for(int i=0;i<n;i++) {
+            parent[i] = i;
+        }
+    }
+
+    // Find operation with Path Compression
+    public static int find(int x) {
+
+        if(parent[x] == x) {
+            return x;
+        }
+
+        return parent[x] = find(parent[x]);
+    }
+
+    // Union operation using Rank
+    public static void union(int a, int b) {
+
+        int parA = find(a);
+        int parB = find(b);
+
+        if(rank[parA] == rank[parB]) {
+
+            parent[parB] = parA;
+            rank[parA]++;
+
+        }
+        else if(rank[parA] < rank[parB]) {
+
+            parent[parA] = parB;
+
+        }
+        else {
+
+            parent[parB] = parA;
+        }
+    }
+
+    public static void main(String args[]) {
+
+        init();
+
+        union(1,3);
+        union(2,4);
+        union(3,6);
+        union(1,4);
+
+        System.out.println(find(3));
+        System.out.println(find(4));
+    }
+}
+```
+
+---
+
+# 10. Example Execution
+
+Initial sets:
+
+```
+{1} {2} {3} {4} {5} {6} {7}
+```
+
+Operations:
+
+```
+union(1,3)
+union(2,4)
+union(3,6)
+union(1,4)
+```
+
+Result:
+
+```
+{1,2,3,4,6}
+{5}
+{7}
+```
+
+---
+
+# 11. Where Disjoint Set is Used
+
+| Algorithm            | Usage               |
+| -------------------- | ------------------- |
+| Kruskal's Algorithm  | Detect cycle in MST |
+| Connected Components | Graph clustering    |
+| Network Connectivity | Union operations    |
+| Image Processing     | Region merging      |
+
+---
+
+# 12. Interview Insights
+
+Common questions:
+
+### Detect cycle using Disjoint Set
+
+```
+if find(u) == find(v)
+    cycle exists
+else
+    union(u,v)
+```
+
+---
+
+### Used in Kruskal's MST
+
+Next topic after this lecture.
+
+Kruskal uses:
+
+```
+Disjoint Set + Edge Sorting
+```
+
+to build MST efficiently.
+
+---
