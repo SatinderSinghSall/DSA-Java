@@ -1056,3 +1056,356 @@ Disjoint Set + Edge Sorting
 to build MST efficiently.
 
 ---
+
+# Problem - 3
+
+## Kruskal’s Algorithm (Minimum Spanning Tree – Greedy)
+
+![Image](https://images.openai.com/static-rsc-4/yG24C0mmygLBp9mR7AabCyQ91T-1pXTkxgExYjzbMld61Nwp-3j8iRv3Lj4QkZWhd0iDqx-TFcdZc5s8pEk825TPQWo1MqCUor2MaNmaZcHRpxyTDVsfDIpJ4ouLJ47JF3KP1USuOZjIiU22sfg60tP1Y-Duby3QF7Mw92Z0f3KbCRcjsDbiKWiaa2L9_nVj?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/VgHVCKz61i7BRrLBeoiluCboZRSjew-tENmhPU5hwMHsY0atO3WJeSDOjb_czB1uQSuh9rPHJdEdMZpv-lJRmawSTcSOc0Uj0_XjAn9nzJKDOymPNsjuLPzp8dkcgq4A4QSsXGSLxra8NnkwVwu6_ZZOvB6X9zCoc4VuF5TiMnqXUzTx0FuLywvlODuguins?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/aeSfsjv85eaeTJ2G_D1id-hFFNeghpjlt2zy0TPz9NCBT5bVVxiMYULzRHT3Typv3CEaVQzi9EaTorWPr5I6b-H_oehU9YMdgm1NXPSdvdCRUuGKbuo6_IBqii5IF2zxbTHQ5AxouhRh89FGaPSQ-E1Tzb8jlahQ5uXkDtRBL4pQvBo3F90xvHxB7G5yonzZ?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/cVq_bns-1X5nEIyvC2Tf8xoIKfvU3RgrQ5djSqHjmwHXlMl0z3RHg9SmMz7BEBwUvFa5FLM4HaIPy1xvwE_wQPseCae9kQC9mywS-SGRICiQUJbgHb1WCJ4dclgi9xGBEutQbnAMizESKshvljW2gBWrWWW3FBDDxB6oXNkS7uCGA9v-gyrBzb_faBQtXsIU?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/2e1ys02Als_-TDMQn0jSr0mrJ1-1UPt3bgt1ZOtMSfoi4cDhMwVfqujec6Ahh5GfOV9Rp6JXQmz70l2NNF9R9AHHmE4tOvU50UYf6KAnLbZGVTJnDrlLKLDpFg4Q0lRQTSZw8B16DUsSutILZ5Hfh9wRTpQhozCLDepMc4dTf5kuDsDuORGEpm-wS_T1xhKm?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/Aa3IJsfKBztkQigFFWR9EAF9zG4FMt3JHz0bRRbOemN8tVVqlA5ZFatYAS4_TptNZsCbQkTtTqpkl1kbH1Tz7DYvvnTdn_8OeeeUkIYcsbmxVQ6043icnihRTAjoLyTd3EtobAtmTmRomhSfEUHxk-J_6ceGMUm51vWMyWuQxllko010qA9mAWY83sPOiZLH?purpose=fullsize)
+
+---
+
+# 1. Problem Statement
+
+Given a **connected weighted graph**, find a **Minimum Spanning Tree (MST)**.
+
+A **Minimum Spanning Tree**:
+
+- Connects **all vertices**
+- Contains **no cycles**
+- Has the **minimum total edge weight**
+
+Kruskal’s algorithm solves this using a **Greedy approach**.
+
+---
+
+# 2. Example Graph
+
+Graph:
+
+```
+      0
+    / | \
+ 10  30  15
+  /      \
+ 1        2
+  \      /
+   40  50
+     \ /
+      3
+```
+
+Edges:
+
+| Edge  | Weight |
+| ----- | ------ |
+| (0,1) | 10     |
+| (0,2) | 15     |
+| (0,3) | 30     |
+| (1,3) | 40     |
+| (2,3) | 50     |
+
+---
+
+# 3. Key Idea
+
+Kruskal’s algorithm builds the MST by:
+
+1️⃣ Sorting edges by **weight**
+2️⃣ Adding the **smallest edge first**
+3️⃣ Avoiding **cycles** using **Disjoint Set (Union-Find)**
+
+---
+
+# 4. Step-by-Step Process
+
+### Step 1 — Sort Edges
+
+```
+(0,1) → 10
+(0,2) → 15
+(0,3) → 30
+(1,3) → 40
+(2,3) → 50
+```
+
+---
+
+### Step 2 — Pick smallest edges
+
+Add:
+
+```
+(0,1) → cost 10
+```
+
+---
+
+### Step 3 — Next edge
+
+Add:
+
+```
+(0,2) → cost 15
+```
+
+---
+
+### Step 4 — Next edge
+
+Add:
+
+```
+(0,3) → cost 30
+```
+
+Now all vertices are connected.
+
+---
+
+### Final MST
+
+Edges:
+
+```
+(0,1)
+(0,2)
+(0,3)
+```
+
+Total cost:
+
+```
+10 + 15 + 30 = 55
+```
+
+---
+
+# 5. Why Disjoint Set is Needed
+
+When selecting edges we must avoid **cycles**.
+
+Example:
+
+```
+if find(u) == find(v)
+    skip edge
+else
+    union(u,v)
+```
+
+So we use:
+
+```
+Disjoint Set (Union-Find)
+```
+
+---
+
+# 6. Algorithm Steps
+
+1️⃣ Create list of edges
+2️⃣ Sort edges by weight
+3️⃣ Initialize **Disjoint Set**
+4️⃣ Traverse edges:
+
+```
+if edge doesn't form cycle
+    add to MST
+```
+
+Stop when:
+
+```
+MST edges = V - 1
+```
+
+---
+
+# 7. Pseudocode
+
+```
+sort edges by weight
+
+initialize disjoint set
+
+mstCost = 0
+
+for each edge (u,v)
+
+    if find(u) != find(v)
+
+        union(u,v)
+        add weight to mstCost
+```
+
+---
+
+# 8. Java Implementation
+
+_(Same comment style as your previous codes)_
+
+```java
+// Graphs: Kruskal's Algorithm (Minimum Spanning Tree)
+
+import java.util.*;
+
+public class KruskalsAlgorithm {
+
+    static class Edge implements Comparable<Edge> {
+
+        int src;
+        int dest;
+        int wt;
+
+        public Edge(int s, int d, int w) {
+            this.src = s;
+            this.dest = d;
+            this.wt = w;
+        }
+
+        @Override
+        public int compareTo(Edge e2) {
+            return this.wt - e2.wt; // ascending order
+        }
+    }
+
+    static int n = 4;
+    static int parent[] = new int[n];
+    static int rank[] = new int[n];
+
+    // Initialize Disjoint Set
+    public static void init() {
+
+        for(int i=0;i<n;i++) {
+            parent[i] = i;
+        }
+    }
+
+    // Find operation
+    public static int find(int x) {
+
+        if(parent[x] == x) {
+            return x;
+        }
+
+        return parent[x] = find(parent[x]);
+    }
+
+    // Union operation
+    public static void union(int a, int b) {
+
+        int parA = find(a);
+        int parB = find(b);
+
+        if(rank[parA] == rank[parB]) {
+            parent[parB] = parA;
+            rank[parA]++;
+        }
+        else if(rank[parA] < rank[parB]) {
+            parent[parA] = parB;
+        }
+        else {
+            parent[parB] = parA;
+        }
+    }
+
+    // Kruskal's Algorithm
+    public static int kruskalsMST(ArrayList<Edge> edges, int V) {
+
+        init();
+
+        Collections.sort(edges);
+
+        int mstCost = 0;
+
+        for(int i=0;i<edges.size();i++) {
+
+            Edge e = edges.get(i);
+
+            if(find(e.src) != find(e.dest)) {
+
+                union(e.src, e.dest);
+
+                mstCost += e.wt;
+            }
+        }
+
+        return mstCost;
+    }
+
+    public static void main(String args[]) {
+
+        int V = 4;
+
+        ArrayList<Edge> edges = new ArrayList<>();
+
+        edges.add(new Edge(0,1,10));
+        edges.add(new Edge(0,2,15));
+        edges.add(new Edge(0,3,30));
+        edges.add(new Edge(1,3,40));
+        edges.add(new Edge(2,3,50));
+
+        int ans = kruskalsMST(edges, V);
+
+        System.out.println("MST Cost = " + ans);
+    }
+}
+```
+
+---
+
+# 9. Output
+
+```
+MST Cost = 55
+```
+
+---
+
+# 10. Time Complexity
+
+| Step                  | Complexity |
+| --------------------- | ---------- |
+| Sorting edges         | O(E log E) |
+| Union-Find operations | O(E α(V))  |
+
+Overall:
+
+```
+O(E log E)
+```
+
+---
+
+# 11. Kruskal vs Prim
+
+| Feature        | Kruskal       | Prim           |
+| -------------- | ------------- | -------------- |
+| Approach       | Edge based    | Vertex based   |
+| Data Structure | Disjoint Set  | Priority Queue |
+| Best for       | Sparse graphs | Dense graphs   |
+
+---
+
+# 12. Real World Applications
+
+Kruskal is used in:
+
+- Network design
+- Road planning
+- Electrical grid design
+- Clustering algorithms
+- Image segmentation
+
+---
