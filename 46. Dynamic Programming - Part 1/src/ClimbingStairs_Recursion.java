@@ -1,5 +1,7 @@
 // Dynamic Programming: Climbing Stairs using Recursion.
 
+// Time Complexity: 2^n
+
 public class ClimbingStairs_Recursion {
     public static int countWays(int n) {
         if (n == 0) {

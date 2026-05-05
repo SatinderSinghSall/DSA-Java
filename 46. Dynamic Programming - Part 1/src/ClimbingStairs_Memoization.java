@@ -1,5 +1,7 @@
 // Dynamic Programming: Climbing Stairs using Memoization.
 
+// Time Complexity: O(n)
+
 import java.util.Arrays;
 
 public class ClimbingStairs_Memoization {
