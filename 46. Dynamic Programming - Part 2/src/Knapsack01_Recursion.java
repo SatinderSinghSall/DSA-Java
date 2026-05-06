@@ -1,5 +1,7 @@
 // Dynamic Programming: O/1 Knapsack Problem using Recursion.
 
+// Time Complexity: 2^n
+
 public class Knapsack01_Recursion {
     public static int knapsack(int val[], int wt[], int W, int n) {
         if (W == 0 || n == 0) {
