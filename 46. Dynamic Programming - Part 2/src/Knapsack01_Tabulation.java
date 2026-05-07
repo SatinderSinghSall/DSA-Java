@@ -35,6 +35,13 @@ public class Knapsack01_Tabulation {
             }
         }
 
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[0].length; j++) {
+                System.out.print(dp[i][j] + " ");
+            }
+            System.out.println();
+        }
+
         return dp[n][W];
     }
 
@@ -45,7 +52,7 @@ public class Knapsack01_Tabulation {
 
         int W = 7;
 
-        System.out.println("Maximum Profit = "
+        System.out.println("\nMaximum Profit = "
                 + knapsack(val, wt, W));
     }
 }
